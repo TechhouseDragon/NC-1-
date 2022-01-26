@@ -1,0 +1,15 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 10:37:01 AM On 5/28/2021
+
+Output: Generates pick and place files
+Type  : Pick Place
+From  : PCB Document [LEDController.PcbDoc]
+   Generated File[Pick Place for LEDController.txt]
+   Generated File[Pick Place for LEDController.csv]
+
+
+Files Generated   : 2
+Documents Printed : 0
+
+Finished Output Generation At 10:37:03 AM On 5/28/2021

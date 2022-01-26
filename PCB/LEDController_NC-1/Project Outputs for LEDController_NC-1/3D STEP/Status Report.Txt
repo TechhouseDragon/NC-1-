@@ -1,0 +1,14 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 10:37:43 AM On 5/28/2021
+
+Output: Export STEP
+Type  : ExportSTEP
+From  : PCB Document [LEDController.PcbDoc]
+   Generated File[LEDController.step]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 10:38:14 AM On 5/28/2021

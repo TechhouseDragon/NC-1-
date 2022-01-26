@@ -1,0 +1,3 @@
+Layer Pairs Export File for PCB: G:\202105\NC-1\LEDController_NC-1\LEDController.PcbDoc
+LayersSetName=Top_Bot_Thru_Holes|DrillFile=ledcontroller-roundholes.txt|DrillLayers=gtl,gbl
+LayersSetName=Top_Bot_Slot_Holes|DrillFile=ledcontroller-slotholes.txt|DrillLayers=gtl,gbl

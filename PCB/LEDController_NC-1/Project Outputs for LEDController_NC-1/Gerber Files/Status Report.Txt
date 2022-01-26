@@ -1,0 +1,13 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : PCB Document [LEDController.PcbDoc]
+   Generated File[LEDController-RoundHoles.TXT]
+   Generated File[LEDController-SlotHoles.TXT]
+   Generated File[LEDController.LDP]
+   Generated File[LEDController.DRR]
+
+
+Files Generated   : 4
+Documents Printed : 0
+
+Finished Output Generation At 10:37:05 AM On 5/28/2021

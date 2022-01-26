@@ -1,0 +1,15 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 10:40:52 AM On 5/28/2021
+
+Output: Bill of Materials
+Type  : BOM
+From  : Project [LEDController_NC-1.PrjPcb]
+   Generated File[Bill of Materials-LEDController_NC-1.xls]
+   Generated File[Bill of Materials-LEDController_NC-1.xls]
+
+
+Files Generated   : 2
+Documents Printed : 0
+
+Finished Output Generation At 10:40:59 AM On 5/28/2021
