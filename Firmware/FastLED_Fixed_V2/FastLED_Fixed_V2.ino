@@ -76,12 +76,6 @@ double loopspeed = 100;
 double strobespeed;
 
 
-
-
-//int LEDChannels[NumLEDs][3] = {
-//  0};
-
-
 byte LEDArray[(numCols * numRows ) / 8 +1] ={
   0};
 int8_t nextLEDArray[(numCols  * numRows) / 8 +1] = {
@@ -90,8 +84,8 @@ int8_t patternArray[(patternCols *patternRows) /8 +1]={
   0};
 int8_t nextpatternArray[(patternCols* patternRows) /8 +1] = {
   0};
-int8_t glowArray[numCols][numRows] = {
-  0};
+float glowArray[numCols][numRows] = {
+  1};
 int8_t colourArray[numCols][numRows][3] = {
 0};
 

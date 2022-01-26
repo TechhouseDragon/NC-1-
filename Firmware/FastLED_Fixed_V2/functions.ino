@@ -131,6 +131,7 @@ void setglow(){
   // calculate the average:
   Gaverage = Gtotal / numReadings;
   glow = (Gaverage/1023);
+
 }
 
 
