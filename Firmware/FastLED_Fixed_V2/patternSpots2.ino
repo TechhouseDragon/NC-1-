@@ -16,10 +16,10 @@ void patternSpots2(){
   if (seed == 1){
     frameloops = 32;
 
-    maxRadius = (numCols/2 +1);
+    maxRadius = (mode-1);
     dropCol=int(random(numCols));
     dropRow=int(random(numRows));
-    rippleRadius = random(3) ;
+    rippleRadius = (mode-1) ;
     seed = 0;
     lastPattern = currentPattern;
     loopCount = loopCount +1;

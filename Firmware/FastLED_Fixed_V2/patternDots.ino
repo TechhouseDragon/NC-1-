@@ -17,8 +17,6 @@ void patternDots(){
   //check if this is the first time through the pattern
   if (lastPattern != currentPattern){
     seed = 1;
-    mode = 5;
-    numLoops = 5;
   }
 
   //seed the pattern - random drop

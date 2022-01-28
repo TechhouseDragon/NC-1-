@@ -5,8 +5,12 @@ int newRowZips;
 int newColZips;
 
 void patternZips(){
+  int frameloops = 16;
   int numLoops = 16;
-  int _mode;
+
+    if (lastPattern != currentPattern){
+    seed = 1;
+  }
   //seed the pattern with a pixel
   if (seed == 1){
     frameloops = NumLEDs/2;
@@ -19,29 +23,24 @@ void patternZips(){
     frameStep = 0;
     loopCount = 0;
   }
-
-  //GENERATE PIXELS
-  
-  _mode = random(5);
-  looptimes = 4;
   
   //PIXEL1
   if (pixelSeed1 == 1){
     pixelStep1 = 1;
 
-if (_mode==1){
+if (mode==1){
     pixelDir1 = 1;
 }
 
-if (_mode==2){
+if (mode==2){
     pixelDir1 = 3;
 }
 
-if (_mode==3){
+if (mode==3){
     pixelDir1 = random(1,3)*2;
    }
 
-if (_mode==4){
+if (mode==4){
     pixelDir1 = random(1,5);
 }
 
@@ -71,19 +70,19 @@ if (_mode==4){
 if ((looptimes > 1)&&(pixelSeed2 == 1)&& (pixelStep1 >= numRowsZips/looptimes)){
     pixelStep2 = 1;
 
-if (_mode==1){
+if (mode==1){
     pixelDir2 = 1;
 }
 
-if (_mode==2){
+if (mode==2){
     pixelDir2 = 3;
 }
 
-if (_mode==3){
+if (mode==3){
     pixelDir2 = random(1,3)*2;
    }
 
-if (_mode==4){
+if (mode==4){
     pixelDir2 = random(1,5);
 }
     if (pixelDir2 == 1){
@@ -110,19 +109,19 @@ if (_mode==4){
   if ((looptimes > 2)&&(pixelSeed3 == 1)&& (pixelStep2 >= numRowsZips/looptimes)){
     pixelStep3 = 1;
 
-if (_mode==1){
+if (mode==1){
     pixelDir3 = 1;
 }
 
-if (_mode==2){
+if (mode==2){
     pixelDir3 = 3;
 }
 
-if (_mode==3){
+if (mode==3){
     pixelDir3 = random(1,3)*2;
    }
 
-if (_mode==4){
+if (mode==4){
     pixelDir3 = random(1,5);
 }
 
@@ -153,19 +152,19 @@ if (_mode==4){
   if ((looptimes > 2)&&(pixelSeed4 == 1)&& (pixelStep3 >= numRowsZips/looptimes)){
     pixelStep4 = 1;
 
-if (_mode==1){
+if (mode==1){
     pixelDir4 = 1;
 }
 
-if (_mode==2){
+if (mode==2){
     pixelDir4 = 3;
 }
 
-if (_mode==3){
+if (mode==3){
     pixelDir4 = random(1,3)*2;
    }
 
-if (_mode==4){
+if (mode==4){
     pixelDir4 = random(1,5);
 }
 
@@ -275,11 +274,11 @@ setOutputArray();
 if (frameStep >= frameloops){ 
     frameStep = 0;
     seed=1;
-//    loopCount = loopCount +1; 
+    loopCount = loopCount +1; 
 }
 
-//  if (loopCount >= numLoops){
-//    loopCount = 0;
-//    currentPattern = currentPattern +1; 
-//  }
+  if (loopCount >= numLoops){
+   loopCount = 0;
+    currentPattern = currentPattern +1; 
+  }
 }

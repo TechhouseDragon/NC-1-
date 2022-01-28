@@ -1,6 +1,5 @@
 void patternSteps(){
   int numLoops = 4;
-  int _mode = random(numCols);
   //check if this is the first time through the pattern  
   if (lastPattern != currentPattern){
     seed = 1;
@@ -23,7 +22,7 @@ void patternSteps(){
     currentRow = random(numRows);
   }
 
-  if (pixelStep <= _mode){
+  if (pixelStep <= mode){
      bitWrite(patternArray[divi(currentCol,  currentRow,patternCols )], modi(currentCol,  currentRow, patternCols), 1);
    // patternArray[currentCol][currentRow]=1;
     if (currentRow < numRows/2){
@@ -37,7 +36,7 @@ void patternSteps(){
     }
   }
 
-if(pixelStep == _mode){
+if(pixelStep == mode){
   //LAY THE FRAME ARRAY OVER THE LED ARRAY
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){
@@ -65,7 +64,7 @@ if(pixelStep == _mode){
   frameStep = frameStep + 1;
   pixelStep = pixelStep + 1;
 
-  if (pixelStep > _mode){
+  if (pixelStep > mode){
     memset(patternArray,0,sizeof(patternArray));
     memset(LEDArray,0,sizeof(LEDArray));
     pixelStep = 1;

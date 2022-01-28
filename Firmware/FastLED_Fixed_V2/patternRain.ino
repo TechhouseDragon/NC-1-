@@ -1,7 +1,7 @@
 
 
 void patternRain(){
-  maxRadius =random(numCols*2);
+  maxRadius =random(mode*2);
   int a;
   float angle;
   int rippleCol;

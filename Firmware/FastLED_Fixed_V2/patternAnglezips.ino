@@ -85,30 +85,21 @@ void patternAnglezips(){
 
   //clear the frame array
   memset(patternArray,0,sizeof(patternArray)); 
-
-  //place the pixel in the frame array    
- // patternArray[pixelCol1][pixelRow1] = 1;
- // patternArray[pixelCol2][pixelRow2] = 1;
-    bitWrite(patternArray[divi(pixelCol1,  pixelRow1,patternCols )], modi(pixelCol1,  pixelRow1, patternCols), 1);
-    bitWrite(patternArray[divi(pixelCol2,  pixelRow2,patternCols )], modi(pixelCol2,  pixelRow2, patternCols), 1);
+  bitWrite(patternArray[divi(pixelCol1,  pixelRow1,patternCols )], modi(pixelCol1,  pixelRow1, patternCols), 1);
+  bitWrite(patternArray[divi(pixelCol2,  pixelRow2,patternCols )], modi(pixelCol2,  pixelRow2, patternCols), 1);
+       if(pixelCol1 <= numCols/2){
+          bitWrite(patternArray[divi(pixelCol1+mode*2,  pixelRow1,patternCols )], modi(pixelCol1+mode*2,  pixelRow1, patternCols), 1);
+        }
+        if(pixelCol1 > numCols/2){
+          bitWrite(patternArray[divi(pixelCol1-mode*2,  pixelRow1,patternCols )], modi(pixelCol1-mode*2,  pixelRow1, patternCols), 1);
+        }
+        if(pixelCol2 <= numCols/2){ 
+          bitWrite(patternArray[divi(pixelCol2+mode*2,  pixelRow2,patternCols )], modi(pixelCol2+mode*2,  pixelRow2, patternCols), 1);
+        }
+        if(pixelCol2 > numCols/2){ 
+          bitWrite(patternArray[divi(pixelCol2-mode*2,  pixelRow2,patternCols )], modi(pixelCol2-mode*2,  pixelRow2, patternCols), 1);
+        }
   
-    if(pixelCol1 <= numCols/2){
-      bitWrite(patternArray[divi(pixelCol1+2,  pixelRow1,patternCols )], modi(pixelCol1+2,  pixelRow1, patternCols), 1);
-   //   patternArray[pixelCol1+2][pixelRow1] = 1;
-    }
-    if(pixelCol1 > numCols/2){
-      bitWrite(patternArray[divi(pixelCol1-2,  pixelRow1,patternCols )], modi(pixelCol1-2,  pixelRow1, patternCols), 1);
-   //   patternArray[pixelCol1-2][pixelRow1] = 1;
-    }
-    if(pixelCol2 <= numCols/2){ 
-      bitWrite(patternArray[divi(pixelCol2+2,  pixelRow2,patternCols )], modi(pixelCol2+2,  pixelRow2, patternCols), 1);
-   //   patternArray[pixelCol2+2][pixelRow2] = 1;
-    }
-    if(pixelCol2 > numCols/2){ 
-      bitWrite(patternArray[divi(pixelCol2-2,  pixelRow2,patternCols )], modi(pixelCol2-2,  pixelRow2, patternCols), 1);
-   //   patternArray[pixelCol2-2][pixelRow2] = 1;
-    }
-
   //LAY THE FRAME ARRAY OVER THE LED ARRAY
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){

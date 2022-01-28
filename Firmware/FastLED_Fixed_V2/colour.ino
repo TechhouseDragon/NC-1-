@@ -14,38 +14,10 @@ int pallet = 1;
 
 
 void setcolour(){
-if (digitalRead(ColorModePin) == 0){  
- // Serial.println("ColorMode : 0");
-  
-  //READ AND AVERAGE COLOR SELECT KNOB INPUT
   colorinput = analogRead(ColorPin);
   colorinput = map(colorinput, 0, 1023, 1023, 0);
-  // subtract the last reading:
-  //SET COLOUR SPEED FROM COLOR KNOB INPUT
-  /*Cloopspeed = 2500;
-  Clooplength = Cloopspeed/(Caverage/1023);
-  if (Clooplength > 128000) {
-    Clooplength = 128000;
-  }
-  Celapsed = millis()-Cloopstart;
-  if (Celapsed > Clooplength) {
-    Celapsed = Clooplength;
-    Cloopstart = millis();
-  }
-    color = (Celapsed/Clooplength);*/
-    int valr = analogRead(RedColorPin);
-    RValue = map(valr, 0, 1023, colorinput, 1);
-    int valg = analogRead(GreenColorPin);
-    GValue = map(valg, 0, 1023, colorinput, 1);
-    int valb = analogRead(BlueColorPin);
-    BValue = map(valb, 0, 1023, colorinput, 1); 
- }else{
-   // Serial.println("ColorMode :  1");
-    colorinput = 1023;
-    RValue = 1023;
-    GValue = 1023;
-    BValue = 1023;
- }
+  //color = colorinput/1023;
+
   Ctotal= Ctotal - Creadings[Cindex];         
   // read from the sensor:  
   Creadings[Cindex] = colorinput; 
@@ -60,7 +32,31 @@ if (digitalRead(ColorModePin) == 0){
   // calculate the average:
   Caverage = Ctotal / colorSamples;
   color = Caverage/1023;
-
+if (digitalRead(ColorModePin) == 0){  
+  RValue = 1023;
+  GValue = 1023;
+  BValue = 1023;
+  Cloopspeed = 2500;
+  Clooplength = Cloopspeed/(Caverage/1023);
+  if (Clooplength > 128000) {
+    Clooplength = 128000;
+  }
+  Celapsed = millis()-Cloopstart;
+  if (Celapsed > Clooplength) {
+    Celapsed = Clooplength;
+    Cloopstart = millis();
+  }
+    color = (Celapsed/Clooplength);
+    
+ }else{     
+    int valr = analogRead(RedColorPin);
+    RValue = map(valr, 0, 1023, colorinput, 1);
+    int valg = analogRead(GreenColorPin);
+    GValue = map(valg, 0, 1023, colorinput, 1);
+    int valb = analogRead(BlueColorPin);
+    BValue = map(valb, 0, 1023, colorinput, 1);  
+    
+ }
 //LOOK FOR PALLET CHANGE 
   palletselect = digitalRead(PalletePin); 
   if (palletselect > palletchange){
@@ -70,13 +66,13 @@ if (digitalRead(ColorModePin) == 0){
     }
   }
   palletchange = palletselect;
-  UpdatePalleteLED();
+  
   //Grab Color From Current Pallet
 
   //PALETTE 1 - RAINBOW
 
   if (pallet==1){  
-    if (color<=0.3){
+    if (color<=0.3){      
       redintensity = RValue;
       greenintensity = GValue*(0.3-color); //green shifts from 1 to 0
       blueintensity = BValue*(0.3-color);  //blue shifts from 1 to 0
@@ -160,7 +156,7 @@ if (digitalRead(ColorModePin) == 0){
       greenintensity = GValue*(color - 0.9)/(1-0.9);  // green shifts from 0 to 1
     } 
   }  
-
+  UpdatePalleteLED();
 
   //READ AND AVERAGE VOLUME KNOB INPUT  
 
@@ -217,32 +213,11 @@ Serial.println(blueintensity);*/
   
 } 
 void UpdatePalleteLED(){
-  switch (pallet){
-    case 1:
-      digitalWrite(BUTTONR, 1);
-      digitalWrite(BUTTONG,1);
-      digitalWrite(BUTTONB, 1);
 
-    break;
-    case 2:
-       digitalWrite(BUTTONR, 1);
-       digitalWrite(BUTTONG,0);
-       digitalWrite(BUTTONB, 1);
-
-    break;
-    case 3:
-      digitalWrite(BUTTONR, 0);
-      digitalWrite(BUTTONG,1);
-      digitalWrite(BUTTONB, 1);
-
-    break;
-    case 4:
-      digitalWrite(BUTTONR,1);
-      digitalWrite(BUTTONG,1);
-      digitalWrite(BUTTONB,0);
-    break;
-    default:
-      // statements
-    break;
-  }  
+  int Rpallet = map(redintensity, 0, 1023, 255, 0);
+  int Gpallet = map(greenintensity, 0, 1023, 255, 0);
+  int Bpallet = map(blueintensity, 0, 1023, 255, 0);
+  analogWrite(BUTTONR, Rpallet);
+  analogWrite(BUTTONG, Gpallet);
+  analogWrite(BUTTONB, Bpallet);  
 } 

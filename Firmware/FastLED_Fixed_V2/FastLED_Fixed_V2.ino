@@ -277,7 +277,7 @@ void setup() {
   patternnumber = 0;
 }
 
-SimplePatternList Mode1 = { patternZips,patternAnglezips, patternBox, patternCentreZips, patternClouds, patternDiamond, patternDots,patternDrivingrain, patternFlash,patternRain};
+SimplePatternList Mode1 = { patternZips,patternAnglezips, patternBox, patternCentreZips, patternClouds, patternDiamond, patternDots,patternDrivingrain, patternSpots2,patternRain};
 SimplePatternList Mode2 = { patternBox, patternCentreZips, patternClouds, patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain};
 SimplePatternList Mode3 = { patternCentreZips, patternClouds, patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternSpots2};
 SimplePatternList Mode4 = { patternClouds, patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternSpots2,patternSteps};
@@ -308,7 +308,7 @@ void loop() {
       if (digitalRead(BlackOutPin)==0){
          currentPattern = 11;
       }else{
-      //  patternZips();
+       // patternZips();
         AutoPattern();  
       }
     }
@@ -329,42 +329,7 @@ void AutoPattern(){
  } // change patterns periodically
  if(nNumber >9) nNumber = 0;
   if(PatternValue[nNumber] == 1){
-    switch(mode){
-      case 1:
-        Mode1[nNumber]();
-      break;
-      case 2:
-        Mode2[nNumber]();
-      break;
-      case 3:
-        Mode3[nNumber]();
-      break;
-      case 4:
-        Mode4[nNumber]();
-      break;
-      case 5:
-        Mode5[nNumber]();
-      break;
-      case 6:
-        Mode6[nNumber]();
-      break;
-      case 7:
-        Mode7[nNumber]();
-      break;
-      case 8:
-        Mode8[nNumber]();
-      break;
-      case 9:
-        Mode9[nNumber]();
-      break;
-      case 10:
-        Mode10[nNumber]();
-      break;
-      default:
-           memset(patternArray,0,sizeof(patternArray)); 
-            setOutputArray();
-      break;
-    }
+    Mode1[nNumber]();   // can change the pattern array.  
   }else {
     nNumber++;
       currentPattern = 1;
@@ -374,9 +339,6 @@ void AutoPattern(){
       memset(patternArray,0,sizeof(patternArray)); 
       setOutputArray();
    }
-
-
-  
 }
 
 void UpdatePattern(){
@@ -400,8 +362,7 @@ void UpdatePattern(){
           }   
           Serial.print("patternnumber : "); Serial.println(patternnumber);      
        }
-        OldPattern[i] = val;
-      
+        OldPattern[i] = val;      
     }
     Pattern_LED();   
 }

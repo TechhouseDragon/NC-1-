@@ -9,6 +9,7 @@ void patternDrivingrain(){
 
   //seed the pattern with a pixel
   if (seed == 1){    
+    currentmode = mode;
     frameloops = 0;
     //seed pixels
     pixelSeed1 = 1;

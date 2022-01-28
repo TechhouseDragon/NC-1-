@@ -14,7 +14,7 @@ void patternWorms(){
   int currentRow;
   int wormlength = 4;
   int numLoops = 96;
-  int _mode;
+
   //check if this is the first time through the pattern
   if (lastPattern != currentPattern){
     seed = 1;
@@ -29,9 +29,7 @@ void patternWorms(){
     worm4Col[0]=int(random(numCols));
     worm4Row[0]=int(random(numRows));
     seed = 0;
-    lastPattern = currentPattern;
-    _mode = 4;
-  
+    lastPattern = currentPattern;  
     
   }
 
@@ -40,19 +38,19 @@ void patternWorms(){
     //patternArray[worm1Col[i]][worm1Row[i]] = 1;
   }
 
-  if (_mode > 1){
+  if (mode > 1){
     for (i = 0; i<wormlength; i++){
        bitWrite(patternArray[divi(worm2Col[i],  worm2Row[i],patternCols )], modi(worm2Col[i],  worm2Row[i], patternCols), 1);
    //   patternArray[worm2Col[i]][worm2Row[i]] = 1;
     }    
   }
-  if (_mode > 2){
+  if (mode > 2){
     for (i = 0; i<wormlength; i++){
        bitWrite(patternArray[divi(worm3Col[i],  worm3Row[i],patternCols )], modi(worm3Col[i],  worm3Row[i], patternCols), 1);
      // patternArray[worm3Col[i]][worm3Row[i]] = 1;
     }    
   }
-    if (_mode > 3){
+    if (mode > 3){
     for (i = 0; i<wormlength; i++){
        bitWrite(patternArray[divi(worm4Col[i],  worm4Row[i],patternCols )], modi(worm4Col[i],  worm4Row[i], patternCols), 1);
      // patternArray[worm4Col[i]][worm4Row[i]] = 1;

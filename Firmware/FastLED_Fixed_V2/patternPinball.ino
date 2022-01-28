@@ -37,7 +37,7 @@ void patternPinball(){
   }
 
   //PIXEL2
-//  if(mode > 2){
+  if(mode > 2){
     if (pixelSeed2 == 1){
       pixelStep2 = 1;
       pixelDir2 = random(2);
@@ -51,10 +51,10 @@ void patternPinball(){
       pixelRow2 = random(numRows);
       pixelSeed2 = 0;
     }
-//  }
+  }
 
   //PIXEL3
-//  if(mode > 3){
+  if(mode > 3){
     if ((pixelSeed3 == 1)){
       pixelStep3 = 1;
       pixelDir3 = random(2);
@@ -68,7 +68,7 @@ void patternPinball(){
       pixelRow3 = random(numRows);
       pixelSeed3 = 0;
     }
- // }
+  }
 
 
 

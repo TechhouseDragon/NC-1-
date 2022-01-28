@@ -14,12 +14,11 @@ void patternClouds(){
     memset(patternArray,0,sizeof(patternArray)); 
     frameloops = 0;
         mode=2;
-for (i =0 ; i<2*mode;i++){
-  int _a = random(numColsClouds);
-  int _b = random(numRowsClouds);
-     bitWrite(patternArray[divi(_a,_b,patternCols )], modi(_a,_b, patternCols), 1);
-    //patternArray[random(numColsClouds)][random(numRowsClouds)] = 1;
-}
+  for (i =0 ; i<2*mode;i++){
+    int _a = random(numColsClouds);
+    int _b = random(numRowsClouds);
+      bitWrite(patternArray[divi(_a,_b,patternCols )], modi(_a,_b, patternCols), 1);
+  }
     lastPattern = currentPattern;
     dir=random(1,9);
     seed = 0;
@@ -58,9 +57,12 @@ for (i =0 ; i<2*mode;i++){
   }
 
 setOutputArray();
-
+  if(lastmode != mode){
+    seed = 1;
+    lastmode = mode;
+  }
   
-//  triggernow = 0;
+  triggernow = 0;
   frameloops = frameloops +1;
   if (frameloops == numRowsClouds){
     loopCount = loopCount +1; 
@@ -69,5 +71,7 @@ setOutputArray();
   }
   if (loopCount > numLoops){
     loopCount = 0;
+    currentPattern = currentPattern +1;
+
   }
 }
