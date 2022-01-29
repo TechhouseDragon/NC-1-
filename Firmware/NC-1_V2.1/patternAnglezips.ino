@@ -163,6 +163,6 @@ void patternAnglezips(){
 
   if (loopCount == numLoops){
     loopCount = 0;
-    currentPattern = currentPattern +1; 
+   // currentPattern = currentPattern +1; 
   }
 }

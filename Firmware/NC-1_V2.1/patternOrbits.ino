@@ -124,13 +124,13 @@ setOutputArray();
   triggernow = 0;
   frameloops = frameloops +1;
 
-  if (frameloops == (2*numRowsOrbits + 2* numColsOrbits)-1){
+  if (frameloops >= (2*numRowsOrbits + 2* numColsOrbits)-1){
     loopCount = loopCount +1; 
     frameloops = 0;
   }
 
-  if (loopCount == numLoops){
+  if (loopCount >= numLoops){
     loopCount = 0;
-    currentPattern = currentPattern +1;
+    //currentPattern = currentPattern +1;
   }  
 }

@@ -1,5 +1,5 @@
-const int numRowsDiamond = 2*numRows;
-const int numColsDiamond = 2*numCols;
+const int numRowsDiamond = numRows*2;
+const int numColsDiamond = numCols*2;
 int newRowDiamond;
 int newColDiamond;
 

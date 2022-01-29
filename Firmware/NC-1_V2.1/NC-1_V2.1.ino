@@ -55,8 +55,8 @@ int Strobe2Pin = 45;
 //Array Variables
 const int numRows = 32;
 const int numCols = 8;
-const int patternRows = 2*numRows;
-const int patternCols = 2*numCols;
+const int patternRows = numRows*2;
+const int patternCols = numCols*2;
 
 
 #define numReadings 3 
@@ -122,8 +122,7 @@ int flashStart;
 
 int8_t dropRow;
 int8_t dropCol;
-int8_t deltaCol;
-int8_t deltaRow;
+
 int8_t rippleRadius;
 int dir;
 int scanCol;
@@ -233,7 +232,7 @@ int STRtotal;                  // the running total
 double STRaverage;                // the average
 int OldPattern[10] = {0,0,0,0,0,0,0,0,0,0};
 int PatternValue[10] = {0,0,0,0,0,0,0,0,0,0};
-typedef void (*SimplePatternList[])();
+typedef void (*PatternList[])();
 int patternnumber;
 
 void setup() {
@@ -277,16 +276,16 @@ void setup() {
   patternnumber = 0;
 }
 
-SimplePatternList Mode1 = { patternZips,patternAnglezips, patternBox, patternCentreZips, patternClouds, patternDiamond, patternDots,patternDrivingrain, patternSpots2,patternRain};
-SimplePatternList Mode2 = { patternBox, patternCentreZips, patternClouds, patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain};
-SimplePatternList Mode3 = { patternCentreZips, patternClouds, patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternSpots2};
-SimplePatternList Mode4 = { patternClouds, patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternSpots2,patternSteps};
-SimplePatternList Mode5 = { patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternSpots2,patternSteps,patternWorms};
-SimplePatternList Mode6 = { patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternSpots2,patternSteps,patternWorms,patternZips};
-SimplePatternList Mode7 = { patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternDiamond,patternSpots2,patternSteps,patternWorms,patternDrivingrain};
-SimplePatternList Mode8 = { patternRain,patternDrivingrain, patternDiamond, patternOrbits,patternZips,patternClouds,patternFlash,patternSpots2,patternSteps,patternDots};
-SimplePatternList Mode9 = { patternSpots2, patternDrivingrain, patternClouds, patternFlash,patternOrbits,patternDots,patternZips,patternRain,patternCentreZips,patternDiamond};
-SimplePatternList Mode10 = {patternRain, patternClouds,patternCentreZips,patternFlash, patternDiamond, patternDots,patternDrivingrain,patternOrbits,patternZips, patternBox};
+PatternList Mode1 = { patternWorms,patternSpots2, patternCentreZips, patternZips, patternOrbits, patternClouds, patternBox,patternDiamond, patternDots,patternFlash};
+//SimplePatternList Mode2 = { patternBox, patternCentreZips, patternClouds, patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain};
+//SimplePatternList Mode3 = { patternCentreZips, patternClouds, patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternSpots2};
+//SimplePatternList Mode4 = { patternClouds, patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternSpots2,patternSteps};
+//SimplePatternList Mode5 = { patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternSpots2,patternSteps,patternWorms};
+//SimplePatternList Mode6 = { patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternSpots2,patternSteps,patternWorms,patternZips};
+//SimplePatternList Mode7 = { patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternDiamond,patternSpots2,patternSteps,patternWorms,patternDrivingrain};
+//SimplePatternList Mode8 = { patternRain,patternDrivingrain, patternDiamond, patternOrbits,patternZips,patternClouds,patternFlash,patternSpots2,patternSteps,patternDots};
+//SimplePatternList Mode9 = { patternSpots2, patternDrivingrain, patternClouds, patternFlash,patternOrbits,patternDots,patternZips,patternRain,patternCentreZips,patternDiamond};
+//SimplePatternList Mode10 = {patternRain, patternClouds,patternCentreZips,patternFlash, patternDiamond, patternDots,patternDrivingrain,patternOrbits,patternZips, patternBox};
 
 
 
@@ -310,6 +309,7 @@ void loop() {
       }else{
        // patternZips();
         AutoPattern();  
+//        Mode1[patternnumber-1]();
       }
     }
 }  
@@ -319,18 +319,11 @@ void loop() {
 int nNumber = 1;
 
 void AutoPattern(){
- int time_tmp = 10*looptimes;  
- EVERY_N_SECONDS( time_tmp ) {
-   nNumber++;  
-   currentPattern = 1;
-   lastPattern=1;
-   loopCount = 0;
-   seed =1;
- } // change patterns periodically
+
  if(nNumber >9) nNumber = 0;
   if(PatternValue[nNumber] == 1){
-    Mode1[nNumber]();   // can change the pattern array.  
-  }else {
+   Mode1[nNumber]();   // can change the pattern array.  
+  }else {         
     nNumber++;
       currentPattern = 1;
       lastPattern=1;
@@ -360,7 +353,7 @@ void UpdatePattern(){
             patternnumber = i+1;
             PatternValue[i] = 1;  
           }   
-          Serial.print("patternnumber : "); Serial.println(patternnumber);      
+//          Serial.print("patternnumber : "); Serial.println(patternnumber);      
        }
         OldPattern[i] = val;      
     }

@@ -32,31 +32,31 @@ void setcolour(){
   // calculate the average:
   Caverage = Ctotal / colorSamples;
   color = Caverage/1023;
-if (digitalRead(ColorModePin) == 0){  
-  RValue = 1023;
-  GValue = 1023;
-  BValue = 1023;
-  Cloopspeed = 2500;
-  Clooplength = Cloopspeed/(Caverage/1023);
-  if (Clooplength > 128000) {
-    Clooplength = 128000;
-  }
-  Celapsed = millis()-Cloopstart;
-  if (Celapsed > Clooplength) {
-    Celapsed = Clooplength;
-    Cloopstart = millis();
-  }
-    color = (Celapsed/Clooplength);
-    
- }else{     
-    int valr = analogRead(RedColorPin);
-    RValue = map(valr, 0, 1023, colorinput, 1);
-    int valg = analogRead(GreenColorPin);
-    GValue = map(valg, 0, 1023, colorinput, 1);
-    int valb = analogRead(BlueColorPin);
-    BValue = map(valb, 0, 1023, colorinput, 1);  
-    
- }
+//if (digitalRead(ColorModePin) == 0){  
+//  RValue = 1023;
+//  GValue = 1023;
+//  BValue = 1023;
+//  Cloopspeed = 2500;
+//  Clooplength = Cloopspeed/(Caverage/1023);
+//  if (Clooplength > 128000) {
+//    Clooplength = 128000;
+//  }
+//  Celapsed = millis()-Cloopstart;
+//  if (Celapsed > Clooplength) {
+//    Celapsed = Clooplength;
+//    Cloopstart = millis();
+//  }
+//    color = (Celapsed/Clooplength);
+//    
+// }else{     
+//    int valr = analogRead(RedColorPin);
+//    RValue = map(valr, 0, 1023, colorinput, 1);
+//    int valg = analogRead(GreenColorPin);
+//    GValue = map(valg, 0, 1023, colorinput, 1);
+//    int valb = analogRead(BlueColorPin);
+//    BValue = map(valb, 0, 1023, colorinput, 1);  
+//    
+// }
 //LOOK FOR PALLET CHANGE 
   palletselect = digitalRead(PalletePin); 
   if (palletselect > palletchange){
@@ -105,19 +105,21 @@ if (digitalRead(ColorModePin) == 0){
   //PALLET 2 - fire
   if (pallet==2){  
     blueintensity = 0;
-    if (color<0.76){
-      redintensity = RValue;
-      greenintensity = GValue*(0.76-color);  // green shifts from 1 to 0
-    }
-    if (color >=0.76 && color <=0.78){
-      redintensity = RValue;
-      greenintensity = 0;
-    }
-    
-    if (color>0.78){
-      redintensity = RValue;
-      greenintensity = GValue*(color-0.78)/(1-0.78); // green shifts from 0 to 1
-    }   
+    redintensity = RValue;
+    greenintensity = (GValue*color)*0.3; //0.3 color correction for yellow
+//    if (color<0.76){
+//      redintensity = RValue;
+//      greenintensity = GValue*(0.76-color);  // green shifts from 1 to 0
+//    }
+//    if (color >=0.76 && color <=0.78){
+//      redintensity = RValue;
+//      greenintensity = 0;
+//    }
+//    
+//    if (color>0.78){
+//      redintensity = RValue;
+//      greenintensity = GValue*(color-0.78)/(1-0.78); // green shifts from 0 to 1
+//    }   
                               
   }
 
@@ -125,18 +127,24 @@ if (digitalRead(ColorModePin) == 0){
 
   if (pallet==3){              
     greenintensity=20; 
-    if (color<0.5){    
-      blueintensity = BValue*(0.5-color);  //blue shifts from 1 to 0
-      redintensity = RValue;
-    }
-    if (color >=0.5 && color <=0.9){
-      blueintensity = BValue*(color-0.5)/(0.9-0.5);  //blue shifts from 0 to 1
-      redintensity = RValue*(0.9-color)/(0.9-0.5); // red shifts from 1 to 0
-    }
-    if(color > 0.9){
-      blueintensity = BValue;
-      redintensity = RValue*(color - 0.9)/(1-0.9);  // red shifts from 0 to 1
-    } 
+
+      
+      blueintensity = BValue*(color);  //blue shifts from 0 to 1
+      redintensity = RValue*(1-color); // red shifts from 1 to 0
+   
+
+//    if (color<0.5){    
+//      blueintensity = 0;
+//      redintensity = RValue;
+//    }
+//    if (color >=0.5 && color <=0.9){
+//      blueintensity = BValue*(color-0.5)/(0.9-0.5);  //blue shifts from 0 to 1
+//      redintensity = RValue*(0.9-color)/(0.9-0.5); // red shifts from 1 to 0
+//    }
+//    if(color > 0.9){
+//      blueintensity = BValue;
+//      redintensity = 0;
+//    } 
   }     
 
   //PALLET 4 - WATER
@@ -156,7 +164,8 @@ if (digitalRead(ColorModePin) == 0){
       greenintensity = GValue*(color - 0.9)/(1-0.9);  // green shifts from 0 to 1
     } 
   }  
-  UpdatePalleteLED();
+//Set the Pallette button color
+
 
   //READ AND AVERAGE VOLUME KNOB INPUT  
 
@@ -176,8 +185,9 @@ if (digitalRead(ColorModePin) == 0){
     Vindex = 0; 
   // calculate the average:
   Vaverage = Vtotal / numReadings;
-  volume = (Vaverage/1023)*.4;  //0.8 Attenuation for power and brightness at the PAL//
-  constrain (volume, 0, 1023);
+  volume = (Vaverage/1023);  //0.8 Attenuation for power and brightness at the PAL//
+  volume = volume*0.05;
+//  constrain (volume, 0, 1023);
   
 
   
@@ -191,6 +201,7 @@ if (digitalRead(ColorModePin) == 0){
   constrain (blueintensity, 0, 1023);
   greenintensity = greenintensity*volume;
   constrain (greenintensity, 0, 1023)  ;
+    UpdatePalleteLED();
  /*
 Serial.print("red average   ");  
 Serial.print(Raverage);

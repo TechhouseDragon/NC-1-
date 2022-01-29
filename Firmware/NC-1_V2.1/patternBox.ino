@@ -1,5 +1,5 @@
-const int numRowsBox = 1.75*numRows;
-const int numColsBox = 1.75*numCols;
+const int numRowsBox = numRows+8;
+const int numColsBox = numCols+8;
 int newRowBox;
 int newColBox;
 
@@ -97,7 +97,7 @@ void patternBox(){
   if (loopCount > numLoops){
     loopCount = 0;
     seed=1;
-    currentPattern = currentPattern +1;
+   currentPattern = currentPattern +1;
 
   }
 }

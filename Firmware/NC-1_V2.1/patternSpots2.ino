@@ -1,5 +1,4 @@
 void patternSpots2(){
-
   int a;
   float angle;
   int rippleCol;
@@ -51,12 +50,10 @@ setOutputArray();
   memset(patternArray,0,sizeof(patternArray)); 
   triggernow = 0;
 
-
-
-  if (loopCount > numLoops){
-    loopCount = 0;
-    currentPattern = currentPattern +1;
-  }
+//  if (loopCount > numLoops){
+//    loopCount = 0;
+//    currentPattern = currentPattern +1;
+//  }
 
 
   if (rippleRadius >= maxRadius){

@@ -86,7 +86,7 @@ int trigger(){
     Sindex = 0; 
   // calculate the average:
   Saverage = Stotal / numReadings;
-  loopspeed = 200/(Saverage/1023);
+  loopspeed = 50/(Saverage/1023);
   if (digitalRead(Speed1)==1 && (digitalRead(Speed2)==0) && (digitalRead(Speed3)==0)){
     loopspeed = loopspeed * 4;
   }
@@ -131,81 +131,82 @@ void setglow(){
   // calculate the average:
   Gaverage = Gtotal / numReadings;
   glow = (Gaverage/1023);
-
+  glow = constrain(glow, 0, 1023); 
 }
-
-
-
-
-//SET PATTERN MODES
+//SET PATTERN MODES and Looptime
 void setmode(){
    int val = analogRead(modePin); 
-    digitalWrite(resetPin1, HIGH);
-    digitalWrite(resetPin2, HIGH);
+   digitalWrite(resetPin1, HIGH);
+   digitalWrite(resetPin2, HIGH);
    int tmp =10 -val/100;
    mode = tmp;
-
-   if(tmp == 0) Mode_LED(10);
-   else Mode_LED(tmp);
-
-  val = analogRead(loopsPin);  
-  tmp =10- val/100;
-  looptimes = tmp;  
-  Loops_LED(tmp);
-
-}
-
-void Mode_LED(int led_number)
-{  
- // digitalWrite(latchPin2, 0);
-
-  if(led_number <= 2){
-     digitalWrite(latchPin2, LOW);
-      shiftOut(dataPin2, clockPin2, MSBFIRST,0);
-      shiftOut(dataPin2, clockPin2, MSBFIRST,pow(2, led_number-1));
-      shiftOut(dataPin2, clockPin2, MSBFIRST, 0);
-      digitalWrite(latchPin2, HIGH);    
-  }
-  else  if(led_number >2 && led_number <=8){
-     digitalWrite(latchPin2, LOW);
-      shiftOut(dataPin2, clockPin2, MSBFIRST,0);
-      shiftOut(dataPin2, clockPin2, MSBFIRST,pow(2, led_number-1)+1);
-      shiftOut(dataPin2, clockPin2, MSBFIRST, 0);
-      digitalWrite(latchPin2, HIGH);    
-  }
-  else if(led_number>8 && led_number<= 10)
-  {
-    led_number = led_number-8;
-   digitalWrite(latchPin2, LOW);
-   shiftOut(dataPin2, clockPin2, MSBFIRST, 0);
-   shiftOut(dataPin2, clockPin2, MSBFIRST, 0);
-   shiftOut(dataPin2, clockPin2, MSBFIRST,pow(2, led_number-1));
-   digitalWrite(latchPin2, HIGH);
-  }
- // digitalWrite(latchPin2, 1);
-}
-void Loops_LED(int led_number)
-{
-   digitalWrite(latchPin2, LOW);
+   int val1 = analogRead(loopsPin);  
+   int tmp1 = 10- val1/100;
+   looptimes = tmp1;  
   
-  if(led_number <= 6){
-    led_number = led_number+2;
-    shiftOut(dataPin2, clockPin2, MSBFIRST, 0);
-    shiftOut(dataPin2, clockPin2, MSBFIRST, 0);
-    shiftOut(dataPin2, clockPin2, MSBFIRST, pow(2, led_number-1)+1);    
+  if(mode == 0) Mode_LED(10, looptimes);
+  else Mode_LED(mode, looptimes); 
+}
+
+void Mode_LED(int mode_number, int loop_number)
+{ 
+  int first, second, third;
+  first = 0;
+  second = 0; 
+  third = 0;
+  if(mode_number <= 2){
+    second = pow(2, mode_number-1);
+    if(loop_number <= 6){
+      loop_number = loop_number+2;
+      third = pow(2, loop_number-1)+1;    
+    }
+    else if(loop_number>6 && loop_number<= 8)
+    {
+      loop_number = loop_number - 6;
+      first =   pow(2, loop_number-1);
+    }else if(loop_number>8 && loop_number<= 10)
+    {
+      loop_number = loop_number - 6;
+      first = pow(2, loop_number-1)+1;
+    }
+  }      
+  else if(mode_number >2 && mode_number <=8){     
+      second = pow(2, mode_number-1)+1;
+    if(loop_number <= 6){
+      loop_number = loop_number+2;
+      third = pow(2, loop_number-1)+1;    
+    }
+    else if(loop_number>6 && loop_number<= 8)
+    {
+      loop_number = loop_number - 6;
+      first =   pow(2, loop_number-1);
+    }else if(loop_number>8 && loop_number<= 10)
+    {
+      loop_number = loop_number - 6;
+      first = pow(2, loop_number-1)+1;
+    }      
   }
-  else if(led_number>6 && led_number<= 8)
+  else if(mode_number>8 && mode_number<= 10)
   {
-     led_number = led_number - 6;
-    shiftOut(dataPin2, clockPin2, MSBFIRST,  pow(2, led_number-1));
-    shiftOut(dataPin2, clockPin2, MSBFIRST, 0);
-    shiftOut(dataPin2, clockPin2, MSBFIRST, 0);
-  }else if(led_number>8 && led_number<= 10)
-  {
-     led_number = led_number - 6;
-    shiftOut(dataPin2, clockPin2, MSBFIRST,  pow(2, led_number-1)+1);
-    shiftOut(dataPin2, clockPin2, MSBFIRST, 0);
-    shiftOut(dataPin2, clockPin2, MSBFIRST, 0);
+    mode_number = mode_number-8;
+   third = pow(2, mode_number-1);
+   if(loop_number <= 6){
+      loop_number = loop_number+2;
+      third = third + pow(2, loop_number-1)+1;    
+    }
+    else if(loop_number>6 && loop_number<= 8)
+    {
+      loop_number = loop_number - 6;
+      first = pow(2, loop_number-1);
+    }else if(loop_number>8 && loop_number<= 10)
+    {
+      loop_number = loop_number - 6;
+      first = pow(2, loop_number-1)+1;
+    }  
   }
-  digitalWrite(latchPin2, HIGH);
+      digitalWrite(latchPin2, LOW);
+      shiftOut(dataPin2, clockPin2, MSBFIRST,first);
+      shiftOut(dataPin2, clockPin2, MSBFIRST,second);
+      shiftOut(dataPin2, clockPin2, MSBFIRST, third);
+      digitalWrite(latchPin2, HIGH);
 }

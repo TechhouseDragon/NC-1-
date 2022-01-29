@@ -46,7 +46,7 @@ if (mode>=3){
     }
    }
 
-    pixelRow1 = 5;
+    pixelRow1 = 16;
     pixelCol1 = random(numCols+1);
     pixelSeed1 = 0;
   }
@@ -68,7 +68,7 @@ if (mode>=3){
       pixelDir2 = 4;
     }
    }
-    pixelRow2 = 5;
+    pixelRow2 = 16;
     pixelCol2 = random(numCols+1);
     pixelSeed2 = 0;
   }
@@ -90,7 +90,7 @@ if (mode>=3){
       pixelDir3 = 4;
     }
    }
-    pixelRow3 = 5;
+    pixelRow3 = 16;
     pixelCol3 = random(numCols+1);
     pixelSeed3 = 0;
   }
@@ -116,7 +116,7 @@ if (mode>=3){
     }
    }
    
-    pixelRow4 = 5;
+    pixelRow4 = 16;
     pixelCol4 = random(numCols+1);
     pixelSeed4 = 0;
   }
@@ -249,6 +249,6 @@ if (frameStep >= frameloops){
 
   if (loopCount >= numLoops){
     loopCount = 0;
-    currentPattern = currentPattern +1; 
+//    currentPattern = currentPattern +1; 
   }
 }

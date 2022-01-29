@@ -1,3 +1,5 @@
+double deltaCol;
+double deltaRow;
 int worm1Row[numRows];
 int worm1Col[numCols];
 int worm2Row[numRows];
@@ -220,10 +222,9 @@ void patternWorms(){
   worm4Row[0] = newRow;
   //end - worm4
   
-  if (loopCount > numLoops){
-    loopCount = 0;
-    currentPattern = currentPattern +1; 
-
-  }
+//  if (loopCount > numLoops){
+//    loopCount = 0;
+//    currentPattern = currentPattern +1; 
+//  }
   loopCount = loopCount +1;
 }    
