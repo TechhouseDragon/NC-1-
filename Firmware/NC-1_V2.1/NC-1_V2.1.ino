@@ -294,8 +294,8 @@ PatternList Mode1 = { patternWorms,patternSpots2, patternCentreZips, patternZips
 void loop() {
  digitalWrite(RedLED, 1);
  digitalWrite(LEDPot, HIGH);
-  UpdatePattern();
-  WriteLEDArray(); 
+ UpdatePattern();
+ WriteLEDArray(); 
   
   if (digitalRead(Strobe1Pin)==1){
     seed = 1;
@@ -307,24 +307,19 @@ void loop() {
       if (digitalRead(BlackOutPin)==0){
          currentPattern = 11;
       }else{
-       // patternZips();
-        AutoPattern();  
-//        Mode1[patternnumber-1]();
+        AutoPattern();
       }
     }
 }  
-
-
-
 int nNumber = 1;
 
 void AutoPattern(){
-
  if(nNumber >9) nNumber = 0;
   if(PatternValue[nNumber] == 1){
    Mode1[nNumber]();   // can change the pattern array.  
+   currentPattern = nNumber;
   }else {         
-    nNumber++;
+      nNumber++;
       currentPattern = 1;
       lastPattern=1;
       loopCount = 0;
@@ -368,8 +363,8 @@ void Pattern_LED()
      digitalWrite(latchPin1, LOW);
      for(int i = 0; i<4; i++){
         if(PatternValue[i] == 1) {
-          bitWrite(b1, i*2,0);
-          bitWrite(b1, i*2+1,1);  
+          bitWrite(b1, i*2,1);
+          bitWrite(b1, i*2+1,0);  
         }else {
           bitWrite(b1, i*2,0);
           bitWrite(b1, i*2+1,0);  
@@ -377,8 +372,8 @@ void Pattern_LED()
      }
       for(int i = 0; i<4; i++){
         if(PatternValue[i+4] == 1) {
-          bitWrite(b2, i*2,0);
-          bitWrite(b2, i*2+1,1);  
+          bitWrite(b2, i*2,1);
+          bitWrite(b2, i*2+1,0);  
         }else{
           bitWrite(b2, i*2,0);
           bitWrite(b2, i*2+1,0);  
@@ -386,8 +381,8 @@ void Pattern_LED()
      }
       for(int i = 0; i<4; i++){
         if(PatternValue[i+8] == 1) {
-          bitWrite(b3, i*2,0);
-          bitWrite(b3, i*2+1,1);  
+          bitWrite(b3, i*2,1);
+          bitWrite(b3, i*2+1,0);  
         }else{
           bitWrite(b3, i*2,0);
           bitWrite(b3, i*2+1,0);  
