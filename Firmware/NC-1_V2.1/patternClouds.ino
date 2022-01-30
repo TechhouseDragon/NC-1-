@@ -17,7 +17,8 @@ void patternClouds(){
   for (i =0 ; i<2*mode;i++){
     int _a = random(numColsClouds);
     int _b = random(numRowsClouds);
-      bitWrite(patternArray[divi(_a,_b,patternCols )], modi(_a,_b, patternCols), 1);
+    WriteBit(_a, _b, "patternArray", 1);
+    //  bitWrite(patternArray[divi(_a,_b,patternCols )], modi(_a,_b, patternCols), 1);
   }
     lastPattern = currentPattern;
     dir=random(1,9);
@@ -43,7 +44,7 @@ void patternClouds(){
       if (newColClouds < 0){
         newColClouds = newColClouds + numColsClouds;
       }  
-       bitWrite(nextpatternArray[divi(newColClouds,  newRowClouds, patternCols)], modi(newColClouds, newRowClouds, patternCols), bitRead(patternArray[divi(col,  row, patternCols)], modi(col, row, patternCols)));
+      WriteBit(newColClouds, newRowClouds, "nextpatternArray", ReadBit(col, row, "patternArray"));       
       //nextpatternArray[newColClouds][newRowClouds] = patternArray[col][row] ;
     }
   }
@@ -51,7 +52,7 @@ void patternClouds(){
   //update the patternArray from the nextpatternArray
   for (row = 0; row < numRowsClouds; row++){
     for (col = 0; col < numColsClouds; col++){
-      bitWrite(patternArray[divi(col,  row, patternCols)], modi(col, row, patternCols), bitRead(nextpatternArray[divi(col,  row, patternCols)], modi(col, row, patternCols)));
+      WriteBit(col, row, "patternArray", ReadBit(col, row, "nextpatternArray"));         
       //patternArray[col][row] = nextpatternArray[col][row] ;
     }
   }

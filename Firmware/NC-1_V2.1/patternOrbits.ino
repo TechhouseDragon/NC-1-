@@ -30,28 +30,29 @@ if (lastPattern != currentPattern){
   memset(patternArray,0,sizeof(patternArray)); 
 
   //place the pixel in the pattern array   
-  bitWrite(patternArray[divi(pixelCol1, pixelRow1,patternCols)], modi(pixelCol1, pixelRow1, patternCols), 1);  
+  WriteBit(pixelCol1, pixelRow1,"patternArray", 1); 
  // patternArray[pixelCol1][pixelRow1] = 1;
 
  //  bitWrite(patternArray[divi((numCols-1) - pixelCol1, (numRows-1) - pixelRow1,patternCols )], modi((numCols-1) - pixelCol1, (numRows-1) - pixelRow1, patternCols), 1);  
 if(looptimes>1){
- bitWrite(patternArray[divi((numCols-1) - pixelCol1, (numRows-1) - pixelRow1,patternCols)], modi((numCols-1) - pixelCol1, (numRows-1) - pixelRow1, patternCols), 1);  
+  WriteBit((numCols-1) - pixelCol1, (numRows-1) - pixelRow1, "patternArray", 1);
 //  patternArray[(numCols-1) - pixelCol1][(numRows-1) - pixelRow1] = 1;
   }
   if(mode>1){
-    bitWrite(patternArray[divi(pixelCol2, pixelRow2,patternCols )], modi(pixelCol2, pixelRow2,patternCols), 1);  
+    WriteBit(pixelCol2, pixelRow2, "patternArray", 1);
+   
   // patternArray[pixelCol2][pixelRow2] = 1;
   }
   if(looptimes>2){
-    bitWrite(patternArray[divi((numCols-1) - pixelCol2, (numRows-1) - pixelRow2,patternCols )], modi((numCols-1) - pixelCol2, (numRows-1) - pixelRow2,patternCols ), 1);  
+    WriteBit((numCols-1) - pixelCol2, (numRows-1) - pixelRow2, "patternArray", 1);
  // patternArray[(numCols-1) - pixelCol2][(numRows-1) - pixelRow2] = 1;
   }  
   if(mode>3){
-    bitWrite(patternArray[divi(pixelCol3, pixelRow3,patternCols)], modi(pixelCol3, pixelRow3,patternCols), 1);  
+    WriteBit(pixelCol3, pixelRow3, "patternArray", 1);    
   //patternArray[pixelCol3][pixelRow3] = 1;
   
     if(looptimes>3){
-      bitWrite(patternArray[divi((numCols-1) - pixelCol3, (numRows-1) - pixelRow3,patternCols)], modi((numCols-1) - pixelCol3, (numRows-1) - pixelRow3,patternCols), 1); 
+      WriteBit((numCols-1) - pixelCol3, (numRows-1) - pixelRow3, "patternArray", 1);    
     //patternArray[(numCols-1) - pixelCol3][(numRows-1) - pixelRow3] = 1;
     }  
 

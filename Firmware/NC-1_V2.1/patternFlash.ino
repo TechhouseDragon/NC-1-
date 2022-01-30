@@ -19,7 +19,7 @@ void patternFlash(){
 if(flashCount == 1){
     for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){   
-      bitWrite(patternArray[divi(col,  row,patternCols )], modi(col, row, patternCols), 1);            
+      WriteBit(col, row, "patternArray", 1);
       //patternArray[col][row] = 1;
     }
   }

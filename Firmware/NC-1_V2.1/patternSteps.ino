@@ -23,15 +23,15 @@ void patternSteps(){
   }
 
   if (pixelStep <= mode){
-     bitWrite(patternArray[divi(currentCol,  currentRow,patternCols )], modi(currentCol,  currentRow, patternCols), 1);
+      WriteBit(currentCol, currentRow, "patternArray", 1);
    // patternArray[currentCol][currentRow]=1;
     if (currentRow < numRows/2){
-      bitWrite(patternArray[divi(currentCol,  currentRow+1,patternCols )], modi(currentCol,  currentRow+1, patternCols), 1);
+      WriteBit(currentCol, currentRow+1, "patternArray", 1);
    //   patternArray[currentCol][currentRow+1]=1;
     }
 
     if (currentRow > numRows/2){
-      bitWrite(patternArray[divi(currentCol,  currentRow-1,patternCols )], modi(currentCol,  currentRow-1, patternCols), 1);
+      WriteBit(currentCol, currentRow-1, "patternArray", 1);
       //patternArray[currentCol][currentRow-1]=1;
     }
   }
@@ -40,7 +40,7 @@ if(pixelStep == mode){
   //LAY THE FRAME ARRAY OVER THE LED ARRAY
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){
-          bitWrite(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols), bitRead(patternArray[divi(col,  row, patternCols)],modi(col, row, patternCols)));
+      WriteBit(col, row, "LEDArray", ReadBit(col, row, patternArray));
           //LEDArray[col][row] = patternArray[col][row];    
     }
   }
@@ -50,9 +50,9 @@ if(pixelStep == mode){
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){      
       glowArray[col][row] = glowArray[col][row]*glow ;            
-      glowArray[col][row] = glowArray[col][row]+bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
+      glowArray[col][row] = glowArray[col][row]+ ReadBit(col, row, "LEDArray");// bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
       constrain(glowArray[col][row], 0, 1);
-      if (bitRead(LEDArray[divi(col,  row, numCols)],  modi(col, row, numCols)) == 1 ){
+      if (ReadBit(col, row, "LEDArray") == 1 ){
         colourArray[col][row] [r] = redintensity;
         colourArray[col][row] [g] = greenintensity;
         colourArray[col][row] [b] = blueintensity;

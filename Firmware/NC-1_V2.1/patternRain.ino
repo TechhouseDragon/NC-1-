@@ -38,7 +38,7 @@ void patternRain(){
 
     //  add ripple to the patternArray
     if ( (rippleCol>=0) &&  (rippleCol< numCols) && (rippleRow>=0) && (rippleRow < numRows )){
-      bitWrite(patternArray[divi(rippleCol, rippleRow,patternCols )], modi(rippleCol,  rippleRow, patternCols), 1);
+      WriteBit(rippleCol, rippleRow,"patternArray", 1);
     //  patternArray[rippleCol][rippleRow] = 1;
     }
   }
@@ -49,7 +49,7 @@ void patternRain(){
   //LAY THE PATTERN ARRAY OVER THE LED ARRAY
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){
-      bitWrite(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols), bitRead(patternArray[divi(col,  row, patternCols)],modi(col, row, patternCols)));
+      WriteBit(col, row, "LEDArray", ReadBit(col, row, "patternArray"));
       //LEDArray[col][row] = patternArray[col][row];
     }
   }
@@ -58,9 +58,9 @@ void patternRain(){
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){      
       glowArray[col][row] = glowArray[col][row]*glow ;            
-      glowArray[col][row] = glowArray[col][row]+bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
+      glowArray[col][row] = glowArray[col][row]+ReadBit(col, row, "LEDArray");// bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
       constrain(glowArray[col][row], 0, 1);
-      if (bitRead(LEDArray[divi(col,  row, numCols)],  modi(col, row, numCols)) == 1 ){
+      if (ReadBit(col, row, "LEDArray") == 1 ){
         colourArray[col][row] [r] = redintensity;
         colourArray[col][row] [g] = greenintensity;
         colourArray[col][row] [b] = blueintensity;

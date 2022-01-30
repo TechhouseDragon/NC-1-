@@ -405,3 +405,29 @@ int modi(int a1, int a2, int n){
   int a4 = a3 % 8;
   return a4;
 }
+
+int ReadBit(int colnum, int rownum, String _name)
+{
+  if(_name == "LEDArray")
+    return bitRead(LEDArray[divi(colnum,  rownum, numCols)],  modi(colnum, rownum, numCols));
+  else if(_name == "nextLEDArray") 
+     return bitRead(nextLEDArray[divi(colnum,  rownum, numCols)],  modi(colnum, rownum, numCols));
+  else if(_name == "patternArray" )
+     return bitRead(patternArray[divi(colnum,  rownum, patternCols)],  modi(colnum, rownum, patternCols));
+  else if(_name == "nextpatternArray" )
+     return bitRead(nextpatternArray[divi(colnum,  rownum, patternCols)],  modi(colnum, rownum, patternCols)); 
+     else return 0;
+
+}
+void WriteBit(int colnum, int rownum, String _name, int bitval)
+{   
+  if(_name == "LEDArray")
+     bitWrite(LEDArray[divi(colnum,  rownum, numCols)],  modi(colnum, rownum, numCols), bitval);
+  else if(_name == "nextLEDArray") 
+      bitWrite(nextLEDArray[divi(colnum,  rownum, numCols)],  modi(colnum, rownum, numCols), bitval);
+  else if(_name == "patternArray" )
+      bitWrite(patternArray[divi(colnum, rownum, patternCols)],  modi(colnum, rownum, patternCols), bitval);
+  else if(_name == "nextpatternArray" )
+      bitWrite(nextpatternArray[divi(colnum,  rownum, patternCols)],  modi(colnum, rownum, patternCols), bitval); 
+
+}

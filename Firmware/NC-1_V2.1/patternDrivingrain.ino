@@ -89,24 +89,24 @@ void patternDrivingrain(){
 
   //place the pixel in the frame array    
   //patternArray[pixelCol1][pixelRow1] = 1;
-  bitWrite(patternArray[divi(pixelCol1, pixelRow1,patternCols )], modi(pixelCol1, pixelRow1, patternCols), 1);
+  WriteBit(pixelCol1, pixelRow1, "patternArray", 1);
   if(looptimes >1){
-    bitWrite(patternArray[divi(pixelCol2, pixelRow2,patternCols )], modi(pixelCol2, pixelRow2, patternCols), 1);
-  //patternArray[pixelCol2][pixelRow2] = 1;
+  WriteBit(pixelCol2, pixelCol2,"patternArray", 1);
+  //patternArray[pixelCol2][pixelCol2] = 1;
   }
   if(looptimes >2){
-    bitWrite(patternArray[divi(pixelCol3, pixelRow3,patternCols )], modi(pixelCol3, pixelRow3, patternCols), 1);
-  //patternArray[pixelCol3][pixelRow3] = 1;
+WriteBit(pixelCol3, pixelRow3, "patternArray", 1);
+//patternArray[pixelCol3][pixelRow3] = 1;
   }
   if(looptimes >3){
-    bitWrite(patternArray[divi(pixelCol4, pixelRow4,patternCols )], modi(pixelCol4, pixelRow4, patternCols), 1);
+    WriteBit(pixelCol4, pixelRow4, "patternArray", 1);
   //patternArray[pixelCol4][pixelRow4] = 1;
   }
   
   //LAY THE FRAME ARRAY OVER THE LED ARRAY
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){
-      bitWrite(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols), bitRead(patternArray[divi(numCols - 1 - col,  row, patternCols)],modi(numCols - 1 - col, row, patternCols)));
+        WriteBit(col, row, "LEDArray", ReadBit(numCols - 1 - col, row, "patternArray"));
       //LEDArray[col][row] = patternArray[numCols - 1 - col][row];
     }
   }
@@ -115,9 +115,9 @@ void patternDrivingrain(){
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){      
       glowArray[col][row] = glowArray[col][row]*glow ;            
-      glowArray[col][row] = glowArray[col][row]+bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
+      glowArray[col][row] = glowArray[col][row]+ ReadBit(col, row, "LEDArray"); // bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
       constrain(glowArray[col][row], 0, 1);
-      if (bitRead(LEDArray[divi(col,  row, numCols)],  modi(col, row, numCols)) == 1 ){
+      if (ReadBit(col, row, "LEDArray") == 1 ){
         colourArray[col][row] [r] = redintensity;
         colourArray[col][row] [g] = greenintensity;
         colourArray[col][row] [b] = blueintensity;

@@ -36,7 +36,8 @@ void patternSpots2(){
     //  add ripple to the patternArray
     if(loopCount %2){
           if ( (rippleCol>=0) &&  (rippleCol< numCols) && (rippleRow>=0) && (rippleRow < numRows )){
-             bitWrite(patternArray[divi(rippleCol,  rippleRow, patternCols )], modi(rippleCol,  rippleRow, patternCols), 1);
+            WriteBit(rippleCol, rippleRow, "patternArray", 1);
+            
           //  patternArray[rippleCol][rippleRow] = 1;
           }
     }

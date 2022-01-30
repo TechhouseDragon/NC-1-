@@ -75,19 +75,19 @@ void patternPinball(){
   //clear the frame array
   memset(patternArray,0,sizeof(patternArray)); 
 
-  //place the pixel in the frame array    
-  bitWrite(patternArray[divi(pixelCol1,  pixelRow1,patternCols )], modi(pixelCol1, pixelRow1, patternCols), 1); 
+  //place the pixel in the frame array   
+  WriteBit(pixelCol1,pixelRow1, "patternArray", 1) ;
  // patternArray[pixelCol1][pixelRow1] = 1;
-  bitWrite(patternArray[divi(pixelCol2,  pixelRow2,patternCols )], modi(pixelCol2, pixelRow2, patternCols), 1); 
+ WriteBit(pixelCol2,pixelRow2, "patternArray", 1) ;
  // patternArray[pixelCol2][pixelRow2] = 1;
-  bitWrite(patternArray[divi(pixelCol3,  pixelRow3,patternCols )], modi(pixelCol3, pixelRow3, patternCols), 1); 
+  WriteBit(pixelCol3,pixelRow3, "patternArray", 1) ;
  // patternArray[pixelCol3][pixelRow3] = 1;
 
   //LAY THE FRAME ARRAY OVER THE LED ARRAY
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){
-
-      bitWrite(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols), bitRead(patternArray[divi(col,  row, patternCols)],modi(col, row, patternCols)));
+      WriteBit(col,row, "LEDArray", ReadBit(col, row, "patternArray")) ;
+     
       //LEDArray[col][row] = patternArray[col][row];
     }
   }
@@ -96,8 +96,8 @@ void patternPinball(){
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){      
       glowArray[col][row] = glowArray[col][row]*glow ;            
-      glowArray[col][row] = glowArray[col][row]+bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
-      if (bitRead(LEDArray[divi(col,  row, numCols)],  modi(col, row, numCols)) == 1){
+      glowArray[col][row] = glowArray[col][row]+ ReadBit(col, row, "LEDArray"); //bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
+      if (ReadBit(col, row, "LEDArray") == 1){
         glowArray[col][row] = 1;
       }
     }

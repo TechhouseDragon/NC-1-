@@ -85,26 +85,32 @@ void patternAnglezips(){
 
   //clear the frame array
   memset(patternArray,0,sizeof(patternArray)); 
-  bitWrite(patternArray[divi(pixelCol1,  pixelRow1,patternCols )], modi(pixelCol1,  pixelRow1, patternCols), 1);
-  bitWrite(patternArray[divi(pixelCol2,  pixelRow2,patternCols )], modi(pixelCol2,  pixelRow2, patternCols), 1);
+  WriteBit(pixelCol1, pixelRow1, "patternArray", 1);
+  WriteBit(pixelCol2, pixelRow2, "patternArray", 1);
+  
        if(pixelCol1 <= numCols/2){
-          bitWrite(patternArray[divi(pixelCol1+mode*2,  pixelRow1,patternCols )], modi(pixelCol1+mode*2,  pixelRow1, patternCols), 1);
+         WriteBit(pixelCol1+mode*2,  pixelRow1, "patternArray", 1);
+          
         }
         if(pixelCol1 > numCols/2){
-          bitWrite(patternArray[divi(pixelCol1-mode*2,  pixelRow1,patternCols )], modi(pixelCol1-mode*2,  pixelRow1, patternCols), 1);
+          WriteBit(pixelCol1-mode*2,  pixelRow1, "patternArray", 1);
+       //   bitWrite(patternArray[divi(pixelCol1-mode*2,  pixelRow1,patternCols )], modi(pixelCol1-mode*2,  pixelRow1, patternCols), 1);
         }
         if(pixelCol2 <= numCols/2){ 
-          bitWrite(patternArray[divi(pixelCol2+mode*2,  pixelRow2,patternCols )], modi(pixelCol2+mode*2,  pixelRow2, patternCols), 1);
+          WriteBit(pixelCol2+mode*2,  pixelRow2, "patternArray", 1);
+        //  bitWrite(patternArray[divi(pixelCol2+mode*2,  pixelRow2,patternCols )], modi(pixelCol2+mode*2,  pixelRow2, patternCols), 1);
         }
         if(pixelCol2 > numCols/2){ 
-          bitWrite(patternArray[divi(pixelCol2-mode*2,  pixelRow2,patternCols )], modi(pixelCol2-mode*2,  pixelRow2, patternCols), 1);
+          WriteBit(pixelCol2-mode*2,  pixelRow2, "patternArray", 1);
+          //bitWrite(patternArray[divi(pixelCol2-mode*2,  pixelRow2,patternCols )], modi(pixelCol2-mode*2,  pixelRow2, patternCols), 1);
         }
   
   //LAY THE FRAME ARRAY OVER THE LED ARRAY
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){
     //  LEDArray[col][row] = patternArray[col][row];
-      bitWrite(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols), bitRead(patternArray[divi(col,  row, patternCols)],modi(col, row, patternCols)));
+    WriteBit(col, row, "LEDArray", ReadBit(col, row, "patternArray"));
+      //bitWrite(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols), bitRead(patternArray[divi(col,  row, patternCols)],modi(col, row, patternCols)));
 
     }
   }
@@ -113,9 +119,9 @@ void patternAnglezips(){
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){      
       glowArray[col][row] = glowArray[col][row]*glow ;            
-      glowArray[col][row] = glowArray[col][row]+bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
+      glowArray[col][row] = glowArray[col][row]+ReadBit(col, row, "LEDArray"); // bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
       constrain(glowArray[col][row], 0, 1);
-      if (bitRead(LEDArray[divi(col,  row, numCols)],  modi(col, row, numCols)) == 1 ){
+      if (ReadBit(col, row, "LEDArray") == 1 ){
         colourArray[col][row] [r] = redintensity;
         colourArray[col][row] [g] = greenintensity;
         colourArray[col][row] [b] = blueintensity;

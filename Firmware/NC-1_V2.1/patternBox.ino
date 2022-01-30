@@ -19,12 +19,12 @@ void patternBox(){
         dir = random(4,9);
    
     for (col = 0; col < numColsBox; col = col + 1){
-       bitWrite(patternArray[divi(col,  numRowsBox-1,patternCols )], modi(col,  numRowsBox-1, patternCols), 1);
+      WriteBit(col, numRowsBox-1, "patternArray", 1);
       //patternArray[col][numRowsBox-1] = 1;
     }
 
     for (row = 0; row < numRowsBox; row = row + 1){
-       bitWrite(patternArray[divi(numColsBox-1,  row, patternCols)], modi(numColsBox-1, row, patternCols),1);
+      WriteBit(numColsBox-1, row, "patternArray", 1);
       //patternArray[numColsBox-1][row] = 1;      
     }
   
@@ -35,7 +35,7 @@ void patternBox(){
   //LAY THE FRAME ARRAY OVER THE LED ARRAY
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){
-       bitWrite(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols), bitRead(patternArray[divi(col,  row, patternCols)],modi(col, row, patternCols)));
+      WriteBit(col, row, "LEDArray", ReadBit(col, row, "patternArray"));       
    //   LEDArray[col][row] = patternArray[col][row];
     }
   }
@@ -59,7 +59,7 @@ void patternBox(){
         newColBox = newColBox + numColsBox;
       }  
      // nextpatternArray[newColBox][newRowBox] = patternArray[col][row] ;
-       bitWrite(nextpatternArray[divi(newColBox,  newRowBox, patternCols)], modi(newColBox, newRowBox, patternCols), bitRead(patternArray[divi(col,  row, patternCols)], modi(col, row, patternCols)));
+     WriteBit(newColBox, newRowBox, "nextpatternArray", ReadBit(col, row, "patternArray"));       
     }
   }
 
@@ -67,7 +67,7 @@ void patternBox(){
   for (row = 0; row < numRowsBox; row++){
     for (col = 0; col < numColsBox; col++){
       //patternArray[col][row] = nextpatternArray[col][row] ;
-      bitWrite(patternArray[divi(col,  row, patternCols)], modi(col, row, patternCols), bitRead(nextpatternArray[divi(col,  row, patternCols)], modi(col, row, patternCols)));
+      WriteBit(col, row, "patternArray", ReadBit(col, row, "nextpatternArray"));      
     }
   }
 
@@ -76,10 +76,10 @@ void patternBox(){
     for (col = 0; col < numCols; col++){      
       glowArray[col][row] = glowArray[col][row]*glow ;            
       //glowArray[col][row] = glowArray[col][row]+LEDArray[col][row];
-      glowArray[col][row] = glowArray[col][row]+bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
+      glowArray[col][row] = glowArray[col][row]+ ReadBit(col, row, "LEDArray");// bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
       constrain(glowArray[col][row], 0, 1);
       //if (LEDArray[col][row] == 1 ){
-      if (bitRead(LEDArray[divi(col,  row, numCols)],  modi(col, row, numCols)) == 1 ){
+      if (ReadBit(col, row, "LEDArray") == 1 ){
         colourArray[col][row] [r] = redintensity;
         colourArray[col][row] [g] = greenintensity;
         colourArray[col][row] [b] = blueintensity;

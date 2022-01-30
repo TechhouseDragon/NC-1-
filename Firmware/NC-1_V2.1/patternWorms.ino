@@ -36,32 +36,37 @@ void patternWorms(){
   }
 
   for (i = 0; i<wormlength; i++){
-     bitWrite(patternArray[divi(worm1Col[i],  worm1Row[i],patternCols )], modi(worm1Col[i],  worm1Row[i], patternCols), 1);
+    WriteBit(worm1Col[i],worm1Row[i],"patternArray", 1);
+     //bitWrite(patternArray[divi(worm1Col[i],  worm1Row[i],patternCols )], modi(worm1Col[i],  worm1Row[i], patternCols), 1);
     //patternArray[worm1Col[i]][worm1Row[i]] = 1;
   }
 
   if (mode > 1){
     for (i = 0; i<wormlength; i++){
-       bitWrite(patternArray[divi(worm2Col[i],  worm2Row[i],patternCols )], modi(worm2Col[i],  worm2Row[i], patternCols), 1);
+      WriteBit(worm2Col[i],worm2Row[i],"patternArray", 1);
+    //   bitWrite(patternArray[divi(worm2Col[i],  worm2Row[i],patternCols )], modi(worm2Col[i],  worm2Row[i], patternCols), 1);
    //   patternArray[worm2Col[i]][worm2Row[i]] = 1;
     }    
   }
   if (mode > 2){
     for (i = 0; i<wormlength; i++){
-       bitWrite(patternArray[divi(worm3Col[i],  worm3Row[i],patternCols )], modi(worm3Col[i],  worm3Row[i], patternCols), 1);
+      WriteBit(worm3Col[i],worm3Row[i],"patternArray", 1);
+    //   bitWrite(patternArray[divi(worm3Col[i],  worm3Row[i],patternCols )], modi(worm3Col[i],  worm3Row[i], patternCols), 1);
      // patternArray[worm3Col[i]][worm3Row[i]] = 1;
     }    
   }
     if (mode > 3){
     for (i = 0; i<wormlength; i++){
-       bitWrite(patternArray[divi(worm4Col[i],  worm4Row[i],patternCols )], modi(worm4Col[i],  worm4Row[i], patternCols), 1);
+      WriteBit(worm4Col[i],worm4Row[i],"patternArray", 1);
+      //bitWrite(patternArray[divi(worm4Col[i],  worm4Row[i],patternCols )], modi(worm4Col[i],  worm4Row[i], patternCols), 1);
      // patternArray[worm4Col[i]][worm4Row[i]] = 1;
     }    
   }
   //LAY THE PATTERN ARRAY OVER THE LED ARRAY
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){
-      bitWrite(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols), bitRead(patternArray[divi(col,  row, patternCols)],modi(col, row, patternCols)));
+      WriteBit(col,row,"LEDArray", ReadBit(col, row, "patternArray"));
+      //bitWrite(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols), bitRead(patternArray[divi(col,  row, patternCols)],modi(col, row, patternCols)));
       //LEDArray[col][row] = patternArray[col][row];
     }
   }
@@ -70,10 +75,11 @@ void patternWorms(){
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){      
       glowArray[col][row] = glowArray[col][row]*glow ;            
-      glowArray[col][row] = glowArray[col][row]+bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
+      //glowArray[col][row] = glowArray[col][row]+bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
+      glowArray[col][row] = glowArray[col][row]+ ReadBit(col, row, "LEDArray");
 
       constrain(glowArray[col][row], 0, 1);
-      if (bitRead(LEDArray[divi(col,  row, numCols)],  modi(col, row, numCols)) == 1 ){
+      if (ReadBit(col, row, "LEDArray") == 1 ){
         colourArray[col][row] [r] = redintensity;
         colourArray[col][row] [g] = greenintensity;
         colourArray[col][row] [b] = blueintensity;

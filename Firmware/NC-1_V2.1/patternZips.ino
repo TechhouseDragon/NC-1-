@@ -194,14 +194,13 @@ if (mode==4){
   memset(patternArray,0,sizeof(patternArray)); 
 
   //place the pixel in the frame array    
-  bitWrite(patternArray[divi(pixelCol1,  pixelRow1,patternCols )], modi(pixelCol1,  pixelRow1, patternCols), 1);
+  WriteBit(pixelCol1, pixelRow1, "patternArray", 1);
   //patternArray[pixelCol1][pixelRow1] = 1;
-  bitWrite(patternArray[divi(pixelCol2,  pixelRow2,patternCols )], modi(pixelCol2,  pixelRow2, patternCols), 1);
+WriteBit(pixelCol2, pixelRow2, "patternArray", 1);
   //patternArray[pixelCol2][pixelRow2] = 1;
-
-  bitWrite(patternArray[divi(pixelCol3,  pixelRow3,patternCols )], modi(pixelCol3,  pixelRow3, patternCols), 1);
+WriteBit(pixelCol3, pixelRow3, "patternArray", 1);
  // patternArray[pixelCol3][pixelRow3] = 1;
-  bitWrite(patternArray[divi(pixelCol4,  pixelRow4,patternCols )], modi(pixelCol4,  pixelRow4, patternCols), 1);
+  WriteBit(pixelCol4, pixelRow4, "patternArray", 1);
   //patternArray[pixelCol4][pixelRow4] = 1;
 
 

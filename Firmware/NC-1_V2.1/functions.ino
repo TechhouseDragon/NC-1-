@@ -5,7 +5,7 @@ void setOutputArray(){
     //LAY THE FRAME ARRAY OVER THE LED ARRAY
   for (row = 0; row < numRows; row++){
     for (col = 0; col < numCols; col++){
-      bitWrite(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols), bitRead(patternArray[divi(col,  row, patternCols)], modi(col, row, numCols)));
+      WriteBit(col, row, "LEDArray", ReadBit(col, row, "patternArray"));
    //   LEDArray[col][row] = patternArray[col][row];
     }
   }
@@ -14,8 +14,8 @@ void setOutputArray(){
     for (col = 0; col < numCols; col++){      
       glowArray [col][row]= glowArray[col][row]*glow ;            
      // glowArray [col][row] = glowArray[col][row]+LEDArray[col][row];
-      glowArray [col][row] = glowArray[col][row]+bitRead(LEDArray[divi(col,  row ,numCols)], modi(col, row, numCols));
-      if (bitRead(LEDArray[divi(col,  row, numCols)],  modi(col, row, numCols)) == 1 ){
+      glowArray [col][row] = glowArray[col][row]+ ReadBit(col, row, "LEDArray");// bitRead(LEDArray[divi(col,  row ,numCols)], modi(col, row, numCols));
+      if (ReadBit(col, row, "LEDArray") == 1 ){
         colourArray[col][row] [r] = redintensity;
         colourArray[col][row] [g] = greenintensity;
         colourArray[col][row] [b] = blueintensity;
