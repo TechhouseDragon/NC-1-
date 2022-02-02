@@ -113,11 +113,6 @@ int currentRow;
 int maxRadius;
 
 
-int flash;
-int flashCount;
-int flashElapsed;
-int flashStart;
-
 
 
 int8_t dropRow;
@@ -167,7 +162,11 @@ int currentmode = 0;
 int lastmode = 0;
 double loopinput = 0;
 int looptimes = 0;
-
+int flashTime = 15;
+int flash;
+int flashCount;
+int flashElapsed;
+int flashStart;
 
 //speed control variables
 double speedinput;
@@ -265,13 +264,18 @@ void setup() {
   pinMode(Speed1, INPUT);
   pinMode(Speed2, INPUT);
   pinMode(Speed3, INPUT);
-  pinMode(Speed4, INPUT);
+  pinMode(Speed4, OUTPUT);
+  digitalWrite(Speed4, HIGH);
+  pinMode(Strobe1Pin, INPUT);
+  pinMode(Strobe2Pin, INPUT);
+ 
   pinMode(ColorModePin, INPUT_PULLUP);
   pinMode(BlackOutPin, INPUT_PULLUP);
   for(int i = 0; i<10; i++){
     pinMode(BTN[i], INPUT);
   }
   Serial.begin(9600);
+
   FastLED.addLeds<WS2811, DATA_PIN, GRB>(LEDChannels, NumLEDs);
   patternnumber = 0;
 }
@@ -316,8 +320,9 @@ int nNumber = 1;
 void AutoPattern(){
  if(nNumber >9) nNumber = 0;
   if(PatternValue[nNumber] == 1){
-   Mode1[nNumber]();   // can change the pattern array.  
-   currentPattern = nNumber;
+    currentPattern = nNumber;
+    Mode1[nNumber]();   // can change the pattern array.  
+   
   }else {         
       nNumber++;
       currentPattern = 1;
