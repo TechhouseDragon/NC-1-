@@ -46,28 +46,7 @@ void patternRain(){
 
 
 
-  //LAY THE PATTERN ARRAY OVER THE LED ARRAY
-  for (row = 0; row < numRows; row++){
-    for (col = 0; col < numCols; col++){
-      WriteBit(col, row, "LEDArray", ReadBit(col, row, "patternArray"));
-      //LEDArray[col][row] = patternArray[col][row];
-    }
-  }
-
-  //update glowArray
-  for (row = 0; row < numRows; row++){
-    for (col = 0; col < numCols; col++){      
-      glowArray[col][row] = glowArray[col][row]*glow ;            
-      glowArray[col][row] = glowArray[col][row]+ReadBit(col, row, "LEDArray");// bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
-      constrain(glowArray[col][row], 0, 1);
-      if (ReadBit(col, row, "LEDArray") == 1 ){
-        colourArray[col][row] [r] = redintensity;
-        colourArray[col][row] [g] = greenintensity;
-        colourArray[col][row] [b] = blueintensity;
-      }
-    }
-  }
-
+   setOutputArray();
   // clear the current pattern array
   memset(patternArray,0,sizeof(patternArray)); 
   triggernow = 0;

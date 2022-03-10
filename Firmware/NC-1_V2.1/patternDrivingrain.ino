@@ -36,8 +36,8 @@ void patternDrivingrain(){
   }
 
   //PIXEL2
-  if(looptimes > 1){
-    if (pixelSeed2 == 1 && (pixelCol1 > numCols/looptimes)){
+  if(mode2 > 1){
+    if (pixelSeed2 == 1 && (pixelCol1 > numCols/mode2)){
       pixelDir2 = random(2);
       if (pixelDir2 == 1){
         pixelDir2 = 5;
@@ -53,7 +53,7 @@ void patternDrivingrain(){
 
   //PIXEL3
   if(mode > 2){
-    if ((pixelSeed3 == 1) && (pixelCol2 > numCols/looptimes)){
+    if ((pixelSeed3 == 1) && (pixelCol2 > numCols/mode2)){
       pixelDir3 = random(2);
       if (pixelDir3 == 1){
         pixelDir3 = 5;
@@ -69,7 +69,7 @@ void patternDrivingrain(){
 
   //PIXEL4
   if(mode > 3){
-    if ((pixelSeed4 == 1) && (pixelCol3 > numCols/looptimes)){
+    if ((pixelSeed4 == 1) && (pixelCol3 > numCols/mode2)){
       pixelDir4 = random(2);
       if (pixelDir4 == 1){
         pixelDir4 = 5;
@@ -90,40 +90,20 @@ void patternDrivingrain(){
   //place the pixel in the frame array    
   //patternArray[pixelCol1][pixelRow1] = 1;
   WriteBit(pixelCol1, pixelRow1, "patternArray", 1);
-  if(looptimes >1){
+  if(mode2 >1){
   WriteBit(pixelCol2, pixelCol2,"patternArray", 1);
   //patternArray[pixelCol2][pixelCol2] = 1;
   }
-  if(looptimes >2){
+  if(mode2 >2){
 WriteBit(pixelCol3, pixelRow3, "patternArray", 1);
 //patternArray[pixelCol3][pixelRow3] = 1;
   }
-  if(looptimes >3){
+  if(mode2 >3){
     WriteBit(pixelCol4, pixelRow4, "patternArray", 1);
   //patternArray[pixelCol4][pixelRow4] = 1;
   }
   
-  //LAY THE FRAME ARRAY OVER THE LED ARRAY
-  for (row = 0; row < numRows; row++){
-    for (col = 0; col < numCols; col++){
-        WriteBit(col, row, "LEDArray", ReadBit(numCols - 1 - col, row, "patternArray"));
-      //LEDArray[col][row] = patternArray[numCols - 1 - col][row];
-    }
-  }
-
-  //update glowArray
-  for (row = 0; row < numRows; row++){
-    for (col = 0; col < numCols; col++){      
-      glowArray[col][row] = glowArray[col][row]*glow ;            
-      glowArray[col][row] = glowArray[col][row]+ ReadBit(col, row, "LEDArray"); // bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
-      constrain(glowArray[col][row], 0, 1);
-      if (ReadBit(col, row, "LEDArray") == 1 ){
-        colourArray[col][row] [r] = redintensity;
-        colourArray[col][row] [g] = greenintensity;
-        colourArray[col][row] [b] = blueintensity;
-      }
-    }
-  }
+   setOutputArray();
 
   //SEED PIXELS THAT FALL OFF
 

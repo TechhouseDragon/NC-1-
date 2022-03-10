@@ -66,7 +66,52 @@ void setshift(){
     rowShift = -1;
   }  
 }
+void setshift2(){
 
+  //East  
+  if (dir == 0){  
+    colShift = colShift+1;
+  }
+
+  //NE
+  else if (dir == 1){
+    colShift = colShift+1;
+    rowShift = rowShift+1;
+  }
+  
+  //North  
+  else if (dir == 2){
+    rowShift = rowShift+1;
+  }
+  
+  //NW
+  else if (dir == 3){
+    colShift = colShift-1;
+    rowShift = rowShift+1;
+  }
+  
+  //West  
+  else if (dir == 4){
+    colShift = colShift-1;
+  }
+    //SW
+  else if (dir == 5){
+    colShift = colShift-1;
+    rowShift = rowShift-1;
+  }
+  
+  //South  
+  else if (dir == 6){
+    rowShift = rowShift-1;
+  }
+
+  //SE
+  else if (dir == 7){
+    colShift = colShift+1;
+    rowShift = rowShift-1;
+  } 
+
+}
 int trigger(){
 
   //READ AND AVERAGE SPEED KNOB INPUT
@@ -86,7 +131,7 @@ int trigger(){
     Sindex = 0; 
   // calculate the average:
   Saverage = Stotal / numReadings;
-  loopspeed = 50/(Saverage/1023);
+  loopspeed = 200/(Saverage/1023);
   if (digitalRead(Speed1)==1 && (digitalRead(Speed2)==0) && (digitalRead(Speed3)==0)){
     loopspeed = loopspeed * 4;
   }
@@ -142,10 +187,10 @@ void setmode(){
    mode = tmp;
    int val1 = analogRead(loopsPin);  
    int tmp1 = 10- val1/100;
-   looptimes = tmp1;  
+   mode2 = tmp1;  
   
-  if(mode == 0) Mode_LED(10, looptimes);
-  else Mode_LED(mode, looptimes); 
+  if(mode == 0) Mode_LED(10, mode2);
+  else Mode_LED(mode, mode2); 
 }
 
 void Mode_LED(int mode_number, int loop_number)

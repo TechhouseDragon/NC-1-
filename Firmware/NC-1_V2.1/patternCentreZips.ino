@@ -46,14 +46,14 @@ if (mode>=3){
     }
    }
 
-    pixelRow1 = 16;
+    pixelRow1 = 5;
     pixelCol1 = random(numCols+1);
     pixelSeed1 = 0;
   }
 
 
 //Pixel 2
-if ((looptimes > 1)&&(pixelSeed2 == 1)&& (pixelStep1 >= numRowsCentreZips/looptimes)){
+if ((mode2 > 1)&&(pixelSeed2 == 1)&& (pixelStep1 >= numRowsCentreZips/mode2)){
     pixelStep2 = 1;
 
 if (mode==1){
@@ -68,14 +68,14 @@ if (mode>=3){
       pixelDir2 = 4;
     }
    }
-    pixelRow2 = 16;
+    pixelRow2 = 5;
     pixelCol2 = random(numCols+1);
     pixelSeed2 = 0;
   }
 
    
    //Pixel 3
-  if ((looptimes > 2)&&(pixelSeed3 == 1)&& (pixelStep2 >= numRowsCentreZips/looptimes)){
+  if ((mode2 > 2)&&(pixelSeed3 == 1)&& (pixelStep2 >= numRowsCentreZips/mode2)){
     pixelStep3 = 1;
 
 if (mode==1){
@@ -90,7 +90,7 @@ if (mode>=3){
       pixelDir3 = 4;
     }
    }
-    pixelRow3 = 16;
+    pixelRow3 = 5;
     pixelCol3 = random(numCols+1);
     pixelSeed3 = 0;
   }
@@ -100,7 +100,7 @@ if (mode>=3){
   
   
    //Pixel 4
-  if ((looptimes > 2)&&(pixelSeed4 == 1)&& (pixelStep3 >= numRowsCentreZips/looptimes)){
+  if ((mode2 > 2)&&(pixelSeed4 == 1)&& (pixelStep3 >= numRowsCentreZips/mode2)){
     pixelStep4 = 1;
 
 if (mode==1){
@@ -116,7 +116,7 @@ if (mode>=3){
     }
    }
    
-    pixelRow4 = 16;
+    pixelRow4 = 5;
     pixelCol4 = random(numCols+1);
     pixelSeed4 = 0;
   }
@@ -133,7 +133,7 @@ if (mode>=3){
     WriteBit(pixelCol1, 11-pixelRow1, "patternArray", 1);
       //patternArray[pixelCol1][11-pixelRow1] = 1;
   }
-  if (looptimes > 1){
+  if (mode2 > 1){
     WriteBit(pixelCol2, pixelRow2, "patternArray", 1);     
 //      patternArray[pixelCol2][pixelRow2] = 1;
     if (mode==4){  
@@ -141,7 +141,7 @@ if (mode>=3){
     //    patternArray[pixelCol2][11-pixelRow2] = 1;
     }
   }
-  if (looptimes > 2){
+  if (mode2 > 2){
        WriteBit(pixelCol3, pixelRow3, "patternArray", 1);        
   //  patternArray[pixelCol3][pixelRow3] = 1;
       if (mode==4){
@@ -149,7 +149,7 @@ if (mode>=3){
     //    patternArray[pixelCol3][11-pixelRow3] = 1;
   }
   }
-  if (looptimes > 3){
+  if (mode2 > 3){
     WriteBit(pixelCol4, pixelCol4, "patternArray", 1);        
  //   patternArray[pixelCol4][pixelCol4] = 1;
       if (mode==4){
@@ -158,27 +158,7 @@ if (mode>=3){
   }
   }
 
-  //LAY THE FRAME ARRAY OVER THE LED ARRAY
-  for (row = 0; row < numRows; row++){
-    for (col = 0; col < numCols; col++){
-      WriteBit(col, row, "LEDArray", ReadBit(col, row, "patternArray"));          
-      //LEDArray[col][row] = patternArray[col][row];
-    }
-  }
-
-  //update glowArray
-  for (row = 0; row < numRows; row++){
-    for (col = 0; col < numCols; col++){      
-      glowArray[col][row] = glowArray[col][row]*glow ;            
-      glowArray[col][row] = glowArray[col][row]+ ReadBit(col, row, "LEDArray"); // bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
-      constrain(glowArray[col][row], 0, 1);
-      if (ReadBit(col, row, "LEDArray") == 1 ){
-        colourArray[col][row] [r] = redintensity;
-        colourArray[col][row] [g] = greenintensity;
-        colourArray[col][row] [b] = blueintensity;
-      }    
-      }
-  }
+ setOutputArray();
 
   //PUSH PIXEL1
   dir = pixelDir1;
@@ -250,6 +230,6 @@ if (frameStep >= frameloops){
 
   if (loopCount >= numLoops){
     loopCount = 0;
-//    currentPattern = currentPattern +1; 
+    currentPattern = currentPattern +1; 
   }
 }

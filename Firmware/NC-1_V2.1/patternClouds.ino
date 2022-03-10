@@ -1,10 +1,13 @@
-const int numRowsClouds = numRows;
-const int numColsClouds = numCols;
+const int numRowsClouds = numRows*2;
+const int numColsClouds = numCols*2;
 int newRowClouds;
 int newColClouds;
 
 
 void patternClouds(){
+  if (lastPattern != currentPattern){
+    seed = 1;
+  }
   int numLoops = 3;
 
 
@@ -65,6 +68,7 @@ setOutputArray();
   
   triggernow = 0;
   frameloops = frameloops +1;
+  
   if (frameloops == numRowsClouds){
     loopCount = loopCount +1; 
     frameloops = 0;
@@ -73,6 +77,5 @@ setOutputArray();
   if (loopCount > numLoops){
     loopCount = 0;
     currentPattern = currentPattern +1;
-
   }
 }

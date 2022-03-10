@@ -1,5 +1,5 @@
 void patternSteps(){
-  int numLoops = 4;
+/*  int numLoops = 4;
   //check if this is the first time through the pattern  
   if (lastPattern != currentPattern){
     seed = 1;
@@ -78,5 +78,5 @@ if(pixelStep == mode){
     loopCount = 0;
     currentPattern = currentPattern +1;
   }
-
+*/
 }

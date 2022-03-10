@@ -15,10 +15,10 @@ void patternSpots2(){
   if (seed == 1){
     frameloops = 32;
 
-    maxRadius = (mode-1);
+    maxRadius =  random(mode);
     dropCol=int(random(numCols));
     dropRow=int(random(numRows));
-    rippleRadius = (mode-1) ;
+    rippleRadius = random(mode) ;
     seed = 0;
     lastPattern = currentPattern;
     loopCount = loopCount +1;
@@ -37,9 +37,7 @@ void patternSpots2(){
     if(loopCount %2){
           if ( (rippleCol>=0) &&  (rippleCol< numCols) && (rippleRow>=0) && (rippleRow < numRows )){
             WriteBit(rippleCol, rippleRow, "patternArray", 1);
-            
-          //  patternArray[rippleCol][rippleRow] = 1;
-          }
+       }
     }
   }
 

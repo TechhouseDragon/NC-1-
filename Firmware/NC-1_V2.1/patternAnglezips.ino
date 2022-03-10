@@ -105,29 +105,7 @@ void patternAnglezips(){
           //bitWrite(patternArray[divi(pixelCol2-mode*2,  pixelRow2,patternCols )], modi(pixelCol2-mode*2,  pixelRow2, patternCols), 1);
         }
   
-  //LAY THE FRAME ARRAY OVER THE LED ARRAY
-  for (row = 0; row < numRows; row++){
-    for (col = 0; col < numCols; col++){
-    //  LEDArray[col][row] = patternArray[col][row];
-    WriteBit(col, row, "LEDArray", ReadBit(col, row, "patternArray"));
-      //bitWrite(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols), bitRead(patternArray[divi(col,  row, patternCols)],modi(col, row, patternCols)));
-
-    }
-  }
-
-  //update glowArray
-  for (row = 0; row < numRows; row++){
-    for (col = 0; col < numCols; col++){      
-      glowArray[col][row] = glowArray[col][row]*glow ;            
-      glowArray[col][row] = glowArray[col][row]+ReadBit(col, row, "LEDArray"); // bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
-      constrain(glowArray[col][row], 0, 1);
-      if (ReadBit(col, row, "LEDArray") == 1 ){
-        colourArray[col][row] [r] = redintensity;
-        colourArray[col][row] [g] = greenintensity;
-        colourArray[col][row] [b] = blueintensity;
-      }
-    }
-  }
+  setOutputArray();
   //PUSH PIXEL1
   dir = pixelDir1;
   setshift();

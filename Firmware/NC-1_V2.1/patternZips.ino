@@ -67,7 +67,7 @@ if (mode==4){
 
 
 //Pixel 2
-if ((looptimes > 1)&&(pixelSeed2 == 1)&& (pixelStep1 >= numRowsZips/looptimes)){
+if ((mode2 > 1)&&(pixelSeed2 == 1)&& (pixelStep1 >= numRowsZips/mode2)){
     pixelStep2 = 1;
 
 if (mode==1){
@@ -106,7 +106,7 @@ if (mode==4){
   }
   
    //Pixel 3
-  if ((looptimes > 2)&&(pixelSeed3 == 1)&& (pixelStep2 >= numRowsZips/looptimes)){
+  if ((mode2 > 2)&&(pixelSeed3 == 1)&& (pixelStep2 >= numRowsZips/mode2)){
     pixelStep3 = 1;
 
 if (mode==1){
@@ -149,7 +149,7 @@ if (mode==4){
   
   
    //Pixel 4
-  if ((looptimes > 2)&&(pixelSeed4 == 1)&& (pixelStep3 >= numRowsZips/looptimes)){
+  if ((mode2 > 2)&&(pixelSeed4 == 1)&& (pixelStep3 >= numRowsZips/mode2)){
     pixelStep4 = 1;
 
 if (mode==1){

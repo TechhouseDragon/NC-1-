@@ -1,5 +1,4 @@
-void patternSpots2(){
-
+void patternSquar(){
   int a;
   float angle;
   int rippleCol;
@@ -16,10 +15,10 @@ void patternSpots2(){
   if (seed == 1){
     frameloops = 32;
 
-    maxRadius = (numCols/2 +1);
+    maxRadius =  random(mode);
     dropCol=int(random(numCols));
     dropRow=int(random(numRows));
-    rippleRadius = random(3) ;
+    rippleRadius = random(mode) ;
     seed = 0;
     lastPattern = currentPattern;
     loopCount = loopCount +1;
@@ -37,9 +36,8 @@ void patternSpots2(){
     //  add ripple to the patternArray
     if(loopCount %2){
           if ( (rippleCol>=0) &&  (rippleCol< numCols) && (rippleRow>=0) && (rippleRow < numRows )){
-             bitWrite(patternArray[divi(rippleCol,  rippleRow, patternCols )], modi(rippleCol,  rippleRow, patternCols), 1);
-          //  patternArray[rippleCol][rippleRow] = 1;
-          }
+            WriteBit(rippleCol, rippleRow, "patternArray", 1);
+       }
     }
   }
 
@@ -51,12 +49,10 @@ setOutputArray();
   memset(patternArray,0,sizeof(patternArray)); 
   triggernow = 0;
 
-
-
-  if (loopCount > numLoops){
-    loopCount = 0;
-    currentPattern = currentPattern +1;
-  }
+//  if (loopCount > numLoops){
+//    loopCount = 0;
+//    currentPattern = currentPattern +1;
+//  }
 
 
   if (rippleRadius >= maxRadius){

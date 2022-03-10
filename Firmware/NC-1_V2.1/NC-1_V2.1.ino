@@ -90,7 +90,7 @@ int8_t colourArray[numCols][numRows][3] = {
 0};
 
 
-//pattern variables
+//pattern variable
 int numPatterns = 10;
 int currentPattern = 1;
 int lastPattern=1;
@@ -98,7 +98,7 @@ int instrobe = 0;
 int strobePattern;
 int frameloops;
 int frameStep;
-int pixelStep;
+//int pixelStep;
 int colorStep =1;
 int loopCount = 0;
 int seed =1;
@@ -122,6 +122,13 @@ int8_t rippleRadius;
 int dir;
 int scanCol;
 
+//Pattern Pixel Programming Global Variables
+int numSeeds = 10;
+byte pixelSeed[10] = {0};
+int pixelDir[10] = {0};
+int pixelStep[10] = {0};
+int pixelRow[10]={0};
+int pixelCol[10]={0};
 int pixelRow1;
 int pixelCol1;
 int pixelDir1;
@@ -161,7 +168,7 @@ int mode = 0;
 int currentmode = 0;
 int lastmode = 0;
 double loopinput = 0;
-int looptimes = 0;
+int mode2 = 0;
 int flashTime = 15;
 int flash;
 int flashCount;
@@ -274,26 +281,13 @@ void setup() {
   for(int i = 0; i<10; i++){
     pinMode(BTN[i], INPUT);
   }
-  Serial.begin(9600);
+   Serial.begin(9600);
 
   FastLED.addLeds<WS2811, DATA_PIN, GRB>(LEDChannels, NumLEDs);
   patternnumber = 0;
 }
 
-PatternList Mode1 = { patternWorms,patternSpots2, patternCentreZips, patternZips, patternOrbits, patternClouds, patternBox,patternDiamond, patternDots,patternFlash};
-//SimplePatternList Mode2 = { patternBox, patternCentreZips, patternClouds, patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain};
-//SimplePatternList Mode3 = { patternCentreZips, patternClouds, patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternSpots2};
-//SimplePatternList Mode4 = { patternClouds, patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternSpots2,patternSteps};
-//SimplePatternList Mode5 = { patternDiamond, patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternSpots2,patternSteps,patternWorms};
-//SimplePatternList Mode6 = { patternDots,patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternSpots2,patternSteps,patternWorms,patternZips};
-//SimplePatternList Mode7 = { patternDrivingrain, patternFlash,patternOrbits,patternZips,patternRain,patternDiamond,patternSpots2,patternSteps,patternWorms,patternDrivingrain};
-//SimplePatternList Mode8 = { patternRain,patternDrivingrain, patternDiamond, patternOrbits,patternZips,patternClouds,patternFlash,patternSpots2,patternSteps,patternDots};
-//SimplePatternList Mode9 = { patternSpots2, patternDrivingrain, patternClouds, patternFlash,patternOrbits,patternDots,patternZips,patternRain,patternCentreZips,patternDiamond};
-//SimplePatternList Mode10 = {patternRain, patternClouds,patternCentreZips,patternFlash, patternDiamond, patternDots,patternDrivingrain,patternOrbits,patternZips, patternBox};
-
-
-
-
+PatternList Mode1 = { patternCircle,patternSpots2, patternZips, patternSquar, patternZips3, patternClouds2, patternBox2,patternDiamond2, patternDots,patternRectacgle};
 
 void loop() {
  digitalWrite(RedLED, 1);
@@ -305,6 +299,8 @@ void loop() {
     seed = 1;
     instrobe = 1;
     patternStrobe(); 
+  }else{
+    instrobe = 0;
   }
   // look for a trigger event
     if (trigger()){      
@@ -321,14 +317,16 @@ void AutoPattern(){
  if(nNumber >9) nNumber = 0;
   if(PatternValue[nNumber] == 1){
     currentPattern = nNumber;
-    Mode1[nNumber]();   // can change the pattern array.  
-   
+    Mode1[nNumber]();   // can change the pattern array.     
   }else {         
       nNumber++;
-      currentPattern = 1;
-      lastPattern=1;
-      loopCount = 0;
-      seed =1;
+      currentPattern = 12;
+      seed = 1;
+      for (row = 0; row < numRows; row++){
+        for (col = 0; col < numCols; col++){      
+          glowArray[col][row] = 0;            
+        }
+      }
       memset(patternArray,0,sizeof(patternArray)); 
       setOutputArray();
    }
@@ -337,14 +335,13 @@ void AutoPattern(){
 void UpdatePattern(){
     for(int i = 0; i<10; i++){
       int val = digitalRead(BTN[i]);
-       if(val == 0 && val != OldPattern[i]) {
-          
+       if(val == 0 && val != OldPattern[i]) {         
           if(PatternValue[i] == 1){
             for(int j = 0; j<10; j++){
                 PatternValue[j]  = 0;
               }
             patternnumber = 0;
-            PatternValue[i] = 0;
+            PatternValue[i] = 0;           
           } 
           else{ 
             for(int j = 0; j<10; j++){
@@ -353,7 +350,6 @@ void UpdatePattern(){
             patternnumber = i+1;
             PatternValue[i] = 1;  
           }   
-//          Serial.print("patternnumber : "); Serial.println(patternnumber);      
        }
         OldPattern[i] = val;      
     }
@@ -399,16 +395,16 @@ void Pattern_LED()
      shiftOut(dataPin1, clockPin1, MSBFIRST,b1);      
      digitalWrite(latchPin1, HIGH);
 }
-int divi(int a1, int a2, int n ){  
+uint8_t divi(int a1, int a2, int n ){  
   int a3= a1 + a2*n;
   int a4 = a3 % 8;
   int a5 = a3 - a4;
-  return (int)(a5/8);
+  return (uint8_t)(a5/8);
 }
-int modi(int a1, int a2, int n){
+uint8_t modi(int a1, int a2, int n){
   int a3= a1 + a2*n;
   int a4 = a3 % 8;
-  return a4;
+  return (uint8_t)a4;
 }
 
 int ReadBit(int colnum, int rownum, String _name)
@@ -431,7 +427,7 @@ void WriteBit(int colnum, int rownum, String _name, int bitval)
   else if(_name == "nextLEDArray") 
       bitWrite(nextLEDArray[divi(colnum,  rownum, numCols)],  modi(colnum, rownum, numCols), bitval);
   else if(_name == "patternArray" )
-      bitWrite(patternArray[divi(colnum, rownum, patternCols)],  modi(colnum, rownum, patternCols), bitval);
+      bitWrite(patternArray[divi(colnum, rownum, patternCols)],  modi(colnum, rownum, patternCols), bitval); 
   else if(_name == "nextpatternArray" )
       bitWrite(nextpatternArray[divi(colnum,  rownum, patternCols)],  modi(colnum, rownum, patternCols), bitval); 
 

@@ -1,1 +1,3 @@
-Record=TopLevelDocument|FileName=LEDController.SchDoc
+Record=TopLevelDocument|FileName=LEDController.SchDoc|SheetNumber= 
+Record=NoMainPathDocument|SourceDocument=LEDController.SchDoc|FileName=PowerSupply.SchDoc|SheetNumber= 
+Record=NoMainPathDocument|SourceDocument=LEDController.SchDoc|FileName=Rotary.SchDoc|SheetNumber= 

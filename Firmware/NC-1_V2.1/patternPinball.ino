@@ -83,25 +83,7 @@ void patternPinball(){
   WriteBit(pixelCol3,pixelRow3, "patternArray", 1) ;
  // patternArray[pixelCol3][pixelRow3] = 1;
 
-  //LAY THE FRAME ARRAY OVER THE LED ARRAY
-  for (row = 0; row < numRows; row++){
-    for (col = 0; col < numCols; col++){
-      WriteBit(col,row, "LEDArray", ReadBit(col, row, "patternArray")) ;
-     
-      //LEDArray[col][row] = patternArray[col][row];
-    }
-  }
-
-  //update glowArray
-  for (row = 0; row < numRows; row++){
-    for (col = 0; col < numCols; col++){      
-      glowArray[col][row] = glowArray[col][row]*glow ;            
-      glowArray[col][row] = glowArray[col][row]+ ReadBit(col, row, "LEDArray"); //bitRead(LEDArray[divi(col,  row, numCols)], modi(col, row, numCols));
-      if (ReadBit(col, row, "LEDArray") == 1){
-        glowArray[col][row] = 1;
-      }
-    }
-  }
+ setOutputArray();
 
  
 

@@ -10,7 +10,7 @@ int BValue = 1023;
 int palletselect = 1;
 int palletchange = 0;
 int pallet = 1;
-
+int Cloopcnt = 0;
 
 
 void setcolour(){
@@ -32,31 +32,31 @@ void setcolour(){
   // calculate the average:
   Caverage = Ctotal / colorSamples;
   color = Caverage/1023;
-//if (digitalRead(ColorModePin) == 0){  
-//  RValue = 1023;
-//  GValue = 1023;
-//  BValue = 1023;
-//  Cloopspeed = 2500;
-//  Clooplength = Cloopspeed/(Caverage/1023);
-//  if (Clooplength > 128000) {
-//    Clooplength = 128000;
-//  }
-//  Celapsed = millis()-Cloopstart;
-//  if (Celapsed > Clooplength) {
-//    Celapsed = Clooplength;
-//    Cloopstart = millis();
-//  }
-//    color = (Celapsed/Clooplength);
-//    
-// }else{     
-//    int valr = analogRead(RedColorPin);
-//    RValue = map(valr, 0, 1023, colorinput, 1);
-//    int valg = analogRead(GreenColorPin);
-//    GValue = map(valg, 0, 1023, colorinput, 1);
-//    int valb = analogRead(BlueColorPin);
-//    BValue = map(valb, 0, 1023, colorinput, 1);  
-//    
-// }
+
+if (digitalRead(ColorModePin) == 0){  
+  RValue = 1023;
+  GValue = 1023;
+  BValue = 1023;
+  Cloopspeed = 2500;
+  Clooplength = Cloopspeed/(Caverage/1023);
+ if (Clooplength > 128000) {
+    Clooplength = 128000;
+  }
+  Celapsed = millis()-Cloopstart;
+  if (Celapsed > Clooplength) {
+    Celapsed = Clooplength;
+    Cloopstart = millis();
+    Cloopcnt ++;    
+  }
+  color = (Celapsed/Clooplength);
+  if(Cloopcnt % 2 == 1){
+    color = 1 - color;     
+  }
+  if(color == 0.0) color = 1;
+  else if(color == 1.0) color = 0;
+
+//   Serial.print("ColorCnt: ");Serial.print(Cloopcnt);   
+//   Serial.print("   color: ");Serial.println(color); 
 //LOOK FOR PALLET CHANGE 
   palletselect = digitalRead(PalletePin); 
   if (palletselect > palletchange){
@@ -66,7 +66,6 @@ void setcolour(){
     }
   }
   palletchange = palletselect;
-  
   //Grab Color From Current Pallet
 
   //PALETTE 1 - RAINBOW
@@ -166,6 +165,22 @@ void setcolour(){
   }  
 //Set the Pallette button color
 
+}
+
+else{
+    int valr = analogRead(RedColorPin);
+    redintensity = map(valr, 0, 1023, 1023, 0);
+    int valg = analogRead(GreenColorPin);
+    greenintensity = map(valg, 0, 1023, 1023, 0);
+    int valb = analogRead(BlueColorPin);
+    blueintensity = map(valb, 0, 1023, 1023, 0);
+
+//    redintensity = RValue;
+//    greenintensity = GValue; 
+//    blueintensity = BValue; 
+    
+}
+  UpdatePalleteLED();  
 
   //READ AND AVERAGE VOLUME KNOB INPUT  
 
@@ -190,7 +205,6 @@ void setcolour(){
 //  constrain (volume, 0, 1023);
   
 
-  
   //Set Colour Intensities
   //red attenuation (0-255)
   redintensity = redintensity*volume;
@@ -201,33 +215,20 @@ void setcolour(){
   constrain (blueintensity, 0, 1023);
   greenintensity = greenintensity*volume;
   constrain (greenintensity, 0, 1023)  ;
-    UpdatePalleteLED();
- /*
-Serial.print("red average   ");  
-Serial.print(Raverage);
-Serial.print("red intens   ");
-Serial.print(redintensity);
-Serial.print("green average   ");
-Serial.print(Grnaverage);
-Serial.print("green intens   ");
-Serial.print(greenintensity);
-Serial.print("blue average   ");
-Serial.print(Bluaverage);
-Serial.print("blue intens   ");
-Serial.println(blueintensity);*/
+    
 
   if (instrobe == 1){
     redintensity = 1023;
     blueintensity = 1023;
     greenintensity = 1023;
   }
-  
+
 } 
 void UpdatePalleteLED(){
 
-  int Rpallet = map(redintensity, 0, 1023, 255, 0);
-  int Gpallet = map(greenintensity, 0, 1023, 255, 0);
-  int Bpallet = map(blueintensity, 0, 1023, 255, 0);
+  int Rpallet = map(redintensity, 0, 1023, 255, 200);
+  int Gpallet = map(greenintensity, 0, 1023, 255, 100);
+  int Bpallet = map(blueintensity, 0, 1023, 255, 100);
   analogWrite(BUTTONR, Rpallet);
   analogWrite(BUTTONG, Gpallet);
   analogWrite(BUTTONB, Bpallet);  

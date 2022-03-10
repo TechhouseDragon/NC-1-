@@ -34,7 +34,7 @@ if (lastPattern != currentPattern){
  // patternArray[pixelCol1][pixelRow1] = 1;
 
  //  bitWrite(patternArray[divi((numCols-1) - pixelCol1, (numRows-1) - pixelRow1,patternCols )], modi((numCols-1) - pixelCol1, (numRows-1) - pixelRow1, patternCols), 1);  
-if(looptimes>1){
+if(mode2>1){
   WriteBit((numCols-1) - pixelCol1, (numRows-1) - pixelRow1, "patternArray", 1);
 //  patternArray[(numCols-1) - pixelCol1][(numRows-1) - pixelRow1] = 1;
   }
@@ -43,7 +43,7 @@ if(looptimes>1){
    
   // patternArray[pixelCol2][pixelRow2] = 1;
   }
-  if(looptimes>2){
+  if(mode2>2){
     WriteBit((numCols-1) - pixelCol2, (numRows-1) - pixelRow2, "patternArray", 1);
  // patternArray[(numCols-1) - pixelCol2][(numRows-1) - pixelRow2] = 1;
   }  
@@ -51,7 +51,7 @@ if(looptimes>1){
     WriteBit(pixelCol3, pixelRow3, "patternArray", 1);    
   //patternArray[pixelCol3][pixelRow3] = 1;
   
-    if(looptimes>3){
+    if(mode2>3){
       WriteBit((numCols-1) - pixelCol3, (numRows-1) - pixelRow3, "patternArray", 1);    
     //patternArray[(numCols-1) - pixelCol3][(numRows-1) - pixelRow3] = 1;
     }  
