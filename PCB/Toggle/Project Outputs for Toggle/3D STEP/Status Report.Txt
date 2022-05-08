@@ -1,0 +1,14 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 1:34:34 AM On 10/25/2020
+
+Output: Export STEP
+Type  : ExportSTEP
+From  : PCB Document [Toggle.PcbDoc]
+   Generated File[Toggle.step]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 1:34:35 AM On 10/25/2020

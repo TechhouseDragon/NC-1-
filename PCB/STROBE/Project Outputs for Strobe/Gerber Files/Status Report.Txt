@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : PCB Document [Strobe.PcbDoc]
+   Generated File[Strobe.TXT]
+   Generated File[Strobe.LDP]
+   Generated File[Strobe.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 9:12:55 AM On 3/19/2021

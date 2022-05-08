@@ -14,6 +14,12 @@ int Cloopcnt = 0;
 
 
 void setcolour(){
+  if (instrobe == 1){
+    redintensity = 1023;
+    blueintensity = 1023;
+    greenintensity = 1023;
+  }
+  else{
   colorinput = analogRead(ColorPin);
   colorinput = map(colorinput, 0, 1023, 1023, 0);
   //color = colorinput/1023;
@@ -215,13 +221,8 @@ else{
   constrain (blueintensity, 0, 1023);
   greenintensity = greenintensity*volume;
   constrain (greenintensity, 0, 1023)  ;
-    
-
-  if (instrobe == 1){
-    redintensity = 1023;
-    blueintensity = 1023;
-    greenintensity = 1023;
   }
+  
 
 } 
 void UpdatePalleteLED(){

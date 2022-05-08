@@ -1,0 +1,14 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 2:06:34 AM On 3/19/2021
+
+Output: Export STEP
+Type  : ExportSTEP
+From  : PCB Document [button.PcbDoc]
+   Generated File[button.step]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 2:06:35 AM On 3/19/2021

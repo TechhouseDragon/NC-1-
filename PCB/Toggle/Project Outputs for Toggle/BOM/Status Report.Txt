@@ -1,0 +1,15 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 9:19:30 AM On 3/19/2021
+
+Output: Bill of Materials
+Type  : BOM
+From  : Project [Toggle.PrjPcb]
+   Generated File[Bill of Materials-Toggle.xls]
+   Generated File[Bill of Materials-Toggle.xls]
+
+
+Files Generated   : 2
+Documents Printed : 0
+
+Finished Output Generation At 9:19:32 AM On 3/19/2021

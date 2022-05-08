@@ -1,0 +1,17 @@
+Altium Designer Pick and Place Locations
+G:\202101\NC-1\STROBE\Project Outputs for Strobe\Pick and Place File\Pick Place for Strobe.txt
+
+========================================================================================================================
+File Design Information:
+
+Date:       19/03/21
+Time:       09:12
+Revision:   Not in VersionControl
+Variant:    No variations
+Units used: mil
+
+Designator Comment               Layer    Footprint             Center-X(mil) Center-Y(mil) Rotation Description                                                    
+R1         0603                  TopLayer R0603                 140.000       695.000       90       "RES SMD 330 OHM 1% 1/10W 0603"                                
+P          "Header 6"            TopLayer Molex_HDR1X6          495.000       150.000       360      "CONN HEADER VERT 6POS 2.54MM"                                 
+C1         0603                  TopLayer C0603                 840.000       690.000       90       "CAP CER 0.1UF 25V X7R 0402"                                   
+BTN        KP0115ANBKG03RGB-2SJB TopLayer KP0115ANBKG03RGB-2SJB 492.500       627.500       0        "Pushbutton Switch SPST-NO Standard, Illuminated Through Hole" 

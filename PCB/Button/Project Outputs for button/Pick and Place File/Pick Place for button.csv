@@ -1,0 +1,56 @@
+Altium Designer Pick and Place Locations
+G:\202101\NC-1\Button\Project Outputs for button\Pick and Place File\Pick Place for button.csv
+
+========================================================================================================================
+File Design Information:
+
+Date:       19/03/21
+Time:       02:06
+Revision:   Not in VersionControl
+Variant:    No variations
+Units used: mil
+
+"Designator","Comment","Layer","Footprint","Center-X(mil)","Center-Y(mil)","Rotation","Description"
+"RL20","0603","TopLayer","R0603","10324.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL19","0603","TopLayer","R0603","9659.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL18","0603","TopLayer","R0603","9294.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL17","0603","TopLayer","R0603","8599.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL16","0603","TopLayer","R0603","8244.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL15","0603","TopLayer","R0603","7524.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL14","0603","TopLayer","R0603","7179.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL13","0603","TopLayer","R0603","6499.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL12","0603","TopLayer","R0603","6159.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL11","0603","TopLayer","R0603","5379.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL10","0603","TopLayer","R0603","5099.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL9","0603","TopLayer","R0603","4424.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL8","0603","TopLayer","R0603","4019.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL7","0603","TopLayer","R0603","3364.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL6","0603","TopLayer","R0603","2954.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL5","0603","TopLayer","R0603","2324.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL4","0603","TopLayer","R0603","1934.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL3","0603","TopLayer","R0603","1289.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL2","0603","TopLayer","R0603","869.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"RL1","0603","TopLayer","R0603","229.688","800.000","90","RES SMD 330 OHM 1% 1/10W 0603"
+"P3","NC","TopLayer","10P_HEADER","8314.688","125.000","360","Header, 10-Pin"
+"P2","NC","TopLayer","10P_HEADER","7314.688","125.000","360","Header, 10-Pin"
+"P1","NC","TopLayer","12P_HEADER","6214.688","125.000","360","Header, 12-Pin"
+"CL10","0603","TopLayer","C0603","10314.688","595.000","90","CAP CER 0.1UF 50V X5R 0603"
+"PAT10","55?-2LED01","TopLayer","5501-2LED","9989.688","635.000","270","Pushbutton Switch SPDT Keyswitch, Illuminated Through Hole"
+"PAT9","55?-2LED01","TopLayer","5501-2LED","8939.688","635.000","270","Pushbutton Switch SPDT Keyswitch, Illuminated Through Hole"
+"PAT8","55?-2LED01","TopLayer","5501-2LED","7889.688","635.000","270","Pushbutton Switch SPDT Keyswitch, Illuminated Through Hole"
+"PAT7","55?-2LED01","TopLayer","5501-2LED","6839.688","635.000","270","Pushbutton Switch SPDT Keyswitch, Illuminated Through Hole"
+"PAT6","55?-2LED01","TopLayer","5501-2LED","5789.688","635.000","270","Pushbutton Switch SPDT Keyswitch, Illuminated Through Hole"
+"PAT5","55?-2LED01","TopLayer","5501-2LED","4739.688","635.000","270","Pushbutton Switch SPDT Keyswitch, Illuminated Through Hole"
+"PAT4","55?-2LED01","TopLayer","5501-2LED","3689.688","635.000","270","Pushbutton Switch SPDT Keyswitch, Illuminated Through Hole"
+"PAT3","55?-2LED01","TopLayer","5501-2LED","2639.688","635.000","270","Pushbutton Switch SPDT Keyswitch, Illuminated Through Hole"
+"PAT2","55?-2LED01","TopLayer","5501-2LED","1589.688","635.000","270","Pushbutton Switch SPDT Keyswitch, Illuminated Through Hole"
+"PAT1","55?-2LED01","TopLayer","5501-2LED","539.688","635.000","270","Pushbutton Switch SPDT Keyswitch, Illuminated Through Hole"
+"CL9","0603","TopLayer","C0603","9299.688","603.504","90","CAP CER 0.1UF 50V X5R 0603"
+"CL8","0603","TopLayer","C0603","8239.688","601.496","90","CAP CER 0.1UF 50V X5R 0603"
+"CL7","0603","TopLayer","C0603","7179.688","605.000","90","CAP CER 0.1UF 50V X5R 0603"
+"CL6","0603","TopLayer","C0603","6159.688","605.000","90","CAP CER 0.1UF 50V X5R 0603"
+"CL5","0603","TopLayer","C0603","5099.688","600.000","90","CAP CER 0.1UF 50V X5R 0603"
+"CL4","0603","TopLayer","C0603","4019.688","605.000","90","CAP CER 0.1UF 50V X5R 0603"
+"CL3","0603","TopLayer","C0603","2954.688","610.000","90","CAP CER 0.1UF 50V X5R 0603"
+"CL2","0603","TopLayer","C0603","1934.688","605.000","90","CAP CER 0.1UF 50V X5R 0603"
+"CL1","0603","TopLayer","C0603","869.688","600.000","90","CAP CER 0.1UF 50V X5R 0603"

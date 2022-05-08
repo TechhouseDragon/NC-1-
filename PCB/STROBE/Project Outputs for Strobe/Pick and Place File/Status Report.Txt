@@ -1,0 +1,15 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 9:12:50 AM On 3/19/2021
+
+Output: Generates pick and place files
+Type  : Pick Place
+From  : PCB Document [Strobe.PcbDoc]
+   Generated File[Pick Place for Strobe.txt]
+   Generated File[Pick Place for Strobe.csv]
+
+
+Files Generated   : 2
+Documents Printed : 0
+
+Finished Output Generation At 9:12:50 AM On 3/19/2021

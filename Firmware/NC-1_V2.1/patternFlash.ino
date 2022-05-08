@@ -40,7 +40,7 @@ for (row = 0; row < numRows; row++){
     }
   } 
 
-  WriteLEDArray();
+ // WriteLEDArray();
  while (flashElapsed < flashTime){
     flashElapsed = millis() - flashStart;    
   }  

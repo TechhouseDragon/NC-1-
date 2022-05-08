@@ -1,0 +1,15 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 2:06:08 AM On 3/19/2021
+
+Output: Generates pick and place files
+Type  : Pick Place
+From  : PCB Document [button.PcbDoc]
+   Generated File[Pick Place for button.txt]
+   Generated File[Pick Place for button.csv]
+
+
+Files Generated   : 2
+Documents Printed : 0
+
+Finished Output Generation At 2:06:09 AM On 3/19/2021

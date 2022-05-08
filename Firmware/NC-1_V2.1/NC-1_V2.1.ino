@@ -287,21 +287,23 @@ void setup() {
   patternnumber = 0;
 }
 
-PatternList Mode1 = { patternCircle,patternSpots2, patternZips, patternSquar, patternZips3, patternClouds2, patternBox2,patternDiamond2, patternDots,patternRectacgle};
+PatternList Mode1 = { patternCircle,patternSpots2, patternZips, patternSquar, patternZips3, patternClouds2, patternBox2,patternDiamond2, patternDots,patternRectangle};
 
 void loop() {
  digitalWrite(RedLED, 1);
  digitalWrite(LEDPot, HIGH);
  UpdatePattern();
  WriteLEDArray(); 
-  
   if (digitalRead(Strobe1Pin)==1){
+    memset(patternArray,0,sizeof(patternArray)); 
     seed = 1;
-    instrobe = 1;
+   // instrobe = 1;
     patternStrobe(); 
   }else{
+    setOutputArray();
     instrobe = 0;
   }
+  
   // look for a trigger event
     if (trigger()){      
       if (digitalRead(BlackOutPin)==0){
@@ -321,13 +323,7 @@ void AutoPattern(){
   }else {         
       nNumber++;
       currentPattern = 12;
-      seed = 1;
-      for (row = 0; row < numRows; row++){
-        for (col = 0; col < numCols; col++){      
-          glowArray[col][row] = 0;            
-        }
-      }
-      memset(patternArray,0,sizeof(patternArray)); 
+      seed = 1;   
       setOutputArray();
    }
 }

@@ -1,0 +1,15 @@
+Altium Designer Pick and Place Locations
+G:\202101\NC-1\Toggle\Project Outputs for Toggle\Pick and Place File\Pick Place for Toggle.csv
+
+========================================================================================================================
+File Design Information:
+
+Date:       19/03/21
+Time:       09:19
+Revision:   Not in VersionControl
+Variant:    No variations
+Units used: mil
+
+"Designator","Comment","Layer","Footprint","Center-X(mil)","Center-Y(mil)","Rotation","Description"
+"TOGGLE","5636AB9","TopLayer","320-916","325.000","405.000","180","SWITCH TOGGLE SPDT 6A 125V"
+"P","Header 3","BottomLayer","B3B-PH-K-S(LF)(SN)","666.181","403.740","90","CONN HEADER VERT 3POS 2MM"
