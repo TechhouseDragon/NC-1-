@@ -14,12 +14,6 @@ int Cloopcnt = 0;
 
 
 void setcolour(){
-  if (instrobe == 1){
-    redintensity = 1023;
-    blueintensity = 1023;
-    greenintensity = 1023;
-  }
-  else{
   colorinput = analogRead(ColorPin);
   colorinput = map(colorinput, 0, 1023, 1023, 0);
   //color = colorinput/1023;
@@ -37,17 +31,25 @@ void setcolour(){
     Cindex = 0; 
   // calculate the average:
   Caverage = Ctotal / colorSamples;
-  color = Caverage/1023;
+  Cloopspeed = Caverage/1023;
+  
+  //LOOK FOR PALLET CHANGE 
+  palletselect = digitalRead(PalletePin); 
+  if (palletselect > palletchange){
+    pallet = pallet + 1;
+    if (pallet > 4){
+      pallet = 1;
+    }
+  }
+  
+  palletchange = palletselect;
 
 if (digitalRead(ColorModePin) == 0){  
   RValue = 1023;
   GValue = 1023;
   BValue = 1023;
-  Cloopspeed = 2500;
-  Clooplength = Cloopspeed/(Caverage/1023);
- if (Clooplength > 128000) {
-    Clooplength = 128000;
-  }
+  Clooplength = 2500/Cloopspeed;
+  Clooplength = constrain (Clooplength,1,128000);
   Celapsed = millis()-Cloopstart;
   if (Celapsed > Clooplength) {
     Celapsed = Clooplength;
@@ -61,17 +63,7 @@ if (digitalRead(ColorModePin) == 0){
   if(color == 0.0) color = 1;
   else if(color == 1.0) color = 0;
 
-//   Serial.print("ColorCnt: ");Serial.print(Cloopcnt);   
-//   Serial.print("   color: ");Serial.println(color); 
-//LOOK FOR PALLET CHANGE 
-  palletselect = digitalRead(PalletePin); 
-  if (palletselect > palletchange){
-    pallet = pallet + 1;
-    if (pallet > 4){
-      pallet = 1;
-    }
-  }
-  palletchange = palletselect;
+
   //Grab Color From Current Pallet
 
   //PALETTE 1 - RAINBOW
@@ -105,54 +97,41 @@ if (digitalRead(ColorModePin) == 0){
     }
   }
 
-
-
   //PALLET 2 - fire
   if (pallet==2){  
-    blueintensity = 0;
-    redintensity = RValue;
-    greenintensity = (GValue*color)*0.3; //0.3 color correction for yellow
-//    if (color<0.76){
-//      redintensity = RValue;
-//      greenintensity = GValue*(0.76-color);  // green shifts from 1 to 0
-//    }
-//    if (color >=0.76 && color <=0.78){
-//      redintensity = RValue;
-//      greenintensity = 0;
-//    }
-//    
-//    if (color>0.78){
-//      redintensity = RValue;
-//      greenintensity = GValue*(color-0.78)/(1-0.78); // green shifts from 0 to 1
-//    }   
-                              
+    blueintensity = 20;
+
+    if (color<0.45){
+      redintensity = RValue;
+      greenintensity = GValue*(0.45-color);  // green shifts from 1 to 0
+    }
+    if (color >=0.45 && color <=0.55){
+      redintensity = RValue;
+      greenintensity = 0;
+    }
+    
+    if (color>0.55){
+      redintensity = RValue;
+      greenintensity = GValue*(color-0.55)/(1-0.55); // green shifts from 0 to 1
+    }   
+   greenintensity = greenintensity*0.5; //add some attenuation for yellow balance                           
   }
 
   //PALLET 3 - SPACE
 
   if (pallet==3){              
     greenintensity=20; 
+    blueintensity = BValue*(color);  //blue shifts from 0 to 1
+    blueintensity = map(blueintensity,0,1023,30,1023);
+    redintensity = RValue*(1-color); // red shifts from 1 to 0
+    redintensity = map(redintensity,0,1023,30,1023);
+    if(redintensity > blueintensity) redintensity = blueintensity;
+    if(redintensity > greenintensity) redintensity = greenintensity;
 
-      
-      blueintensity = BValue*(color);  //blue shifts from 0 to 1
-      redintensity = RValue*(1-color); // red shifts from 1 to 0
+  } 
    
 
-//    if (color<0.5){    
-//      blueintensity = 0;
-//      redintensity = RValue;
-//    }
-//    if (color >=0.5 && color <=0.9){
-//      blueintensity = BValue*(color-0.5)/(0.9-0.5);  //blue shifts from 0 to 1
-//      redintensity = RValue*(0.9-color)/(0.9-0.5); // red shifts from 1 to 0
-//    }
-//    if(color > 0.9){
-//      blueintensity = BValue;
-//      redintensity = 0;
-//    } 
-  }     
-
-  //PALLET 4 - WATER
+  //PALLET 4 - UNDER THE SEA
 
   if (pallet==4){              
     redintensity=20;     
@@ -169,8 +148,6 @@ if (digitalRead(ColorModePin) == 0){
       greenintensity = GValue*(color - 0.9)/(1-0.9);  // green shifts from 0 to 1
     } 
   }  
-//Set the Pallette button color
-
 }
 
 else{
@@ -181,11 +158,21 @@ else{
     int valb = analogRead(BlueColorPin);
     blueintensity = map(valb, 0, 1023, 1023, 0);
 
-//    redintensity = RValue;
-//    greenintensity = GValue; 
-//    blueintensity = BValue; 
-    
+    if (pallet == 2){
+      blueintensity = 20;
+      if (redintensity < greenintensity){
+          greenintensity = redintensity;
+        }
+    }
+    if (pallet == 3){
+      greenintensity = 20;
+    }
+    if (pallet == 4){
+      redintensity = 20;
+    }   
 }
+
+//Set the Pallette button color
   UpdatePalleteLED();  
 
   //READ AND AVERAGE VOLUME KNOB INPUT  
@@ -210,27 +197,27 @@ else{
   volume = volume*0.05;
 //  constrain (volume, 0, 1023);
   
-
   //Set Colour Intensities
   //red attenuation (0-255)
   redintensity = redintensity*volume;
-  constrain (redintensity, 0, 1023);
   //blue attenuation (0-255)
   blueintensity = blueintensity*volume;
   //green attenuation (0-255)
-  constrain (blueintensity, 0, 1023);
   greenintensity = greenintensity*volume;
-  constrain (greenintensity, 0, 1023)  ;
+    
+  if (instrobe == 1){
+    redintensity = 1023;
+    blueintensity = 1023;
+    greenintensity = 1023;
   }
-  
-
 } 
+
 void UpdatePalleteLED(){
 
-  int Rpallet = map(redintensity, 0, 1023, 255, 200);
-  int Gpallet = map(greenintensity, 0, 1023, 255, 100);
-  int Bpallet = map(blueintensity, 0, 1023, 255, 100);
-  analogWrite(BUTTONR, Rpallet);
-  analogWrite(BUTTONG, Gpallet);
-  analogWrite(BUTTONB, Bpallet);  
+  int Rpallete = map(redintensity, 0, 1023, 255, 200);
+  int Gpallete = map(greenintensity, 0, 1023, 255, 100);
+  int Bpallete = map(blueintensity, 0, 1023, 255, 100);
+  analogWrite(BUTTONR, Rpallete);
+  analogWrite(BUTTONG, Gpallete);
+  analogWrite(BUTTONB, Bpallete);  
 } 

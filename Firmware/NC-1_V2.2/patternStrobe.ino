@@ -2,15 +2,12 @@
 
 void patternStrobe(){
 
-  while (digitalRead(Strobe1Pin)==1){ 
-     instrobe = 1;
-     WriteLEDArray();
-     setOutputArray();
+  while (digitalRead(Strobe1Pin)==1){         
      strobespeed = analogRead(SpeedPin);
      strobespeed = map(strobespeed,0,1023,0,500);
     //seed the pattern   
     if (seed == 1){
-
+      memset(patternArray,0,sizeof(patternArray)); 
       glowArray[random(numCols)][random(numRows)] = 1;
       glowArray[random(numCols)][random(numRows)] = 1;
       glowArray[random(numCols)][random(numRows)] = 1;
@@ -21,9 +18,8 @@ void patternStrobe(){
       flashStart = millis();
       seed = 0;
     }
-    else{
-     
-
+      setOutputArray();  
+      WriteLEDArray();      
       flashElapsed = millis() - flashStart;
 
       if (flashElapsed > flashTime){
@@ -34,7 +30,7 @@ void patternStrobe(){
       if (flashElapsed  > (flashTime + strobespeed)){
         seed = 1; 
       }  
-    }
+    
     
   }
 }
