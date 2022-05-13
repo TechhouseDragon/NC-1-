@@ -1,4 +1,4 @@
-void patternSpots2(){
+void patternSpots(){
   int a;
   float angle;
   int rippleCol;
@@ -12,13 +12,11 @@ void patternSpots2(){
   }
 
   //seed the pattern - random drop
-  if (seed == 1){
-    frameloops = 32;
-
-    maxRadius =  random(mode);
+  if (seed == 1){  
+    maxRadius =  mode;
     dropCol=int(random(numCols));
     dropRow=int(random(numRows));
-    rippleRadius = random(mode) ;
+    rippleRadius = mode2 ;
     seed = 0;
     lastPattern = currentPattern;
     loopCount = loopCount +1;
@@ -49,14 +47,14 @@ setOutputArray();
   memset(patternArray,0,sizeof(patternArray)); 
   triggernow = 0;
 
-//  if (loopCount > numLoops){
-//    loopCount = 0;
-//    currentPattern = currentPattern +1;
-//  }
+  if(rippleRadius < maxRadius)
+    rippleRadius = rippleRadius +1; 
+  else
+    rippleRadius = rippleRadius -1; 
 
-
-  if (rippleRadius >= maxRadius){
+  if (rippleRadius == maxRadius){
+    currentPattern = currentPattern +1;
     seed = 1;
   } 
-   rippleRadius = rippleRadius +1; 
+  
 }    

@@ -20,11 +20,16 @@ void patternSpirals(){
         int SCol = SpiralCol+ (CircleNumber/3) * cos(CircleNumber);
         int SRow = SpiralRow + (CircleNumber/3) * sin(CircleNumber);
         if ( (SCol>=0) &&  (SCol< numCols) && (SRow>=0) && (SRow < numRows )){
-          WriteBit(SCol, SRow, "patternArray", 1);        
+          WriteBit(SCol, SRow, "patternArray", 1);           
         }
-    
-    setOutputArray();
-    CircleNumber= CircleNumber+0.2;
+        setOutputArray();       
+        memset(patternArray,0,sizeof(patternArray));   
+    if(CircleNumber < 10){
+      CircleNumber= CircleNumber+0.5;  
+    }else{
+      CircleNumber= CircleNumber+0.2;
+    }
+    triggernow = 0;
     if(CircleNumber >= CurrentSize * 10){
       seed = 1;
       CircleNumber = 1;
@@ -43,12 +48,17 @@ void patternSpirals(){
     }
         int SCol = SpiralCol+ (CircleNumber/3) * cos(CircleNumber);
         int SRow = SpiralRow + (CircleNumber/3) * sin(CircleNumber);
-        if ( (SCol>=0) &&  (SCol< numCols) && (SRow>=0) && (SRow < numRows )){
-          WriteBit(SCol, SRow, "patternArray", 1);        
-        }
-    
-    setOutputArray();
-    CircleNumber= CircleNumber -0.2;
+       if ( (SCol>=0) &&  (SCol< numCols) && (SRow>=0) && (SRow < numRows )){
+          WriteBit(SCol, SRow, "patternArray", 1);
+        } 
+        setOutputArray();       
+        memset(patternArray,0,sizeof(patternArray));  
+    if(CircleNumber < 10){
+      CircleNumber= CircleNumber-0.5;  
+    }else{
+      CircleNumber= CircleNumber-0.2;
+    }
+   triggernow = 0;
     if(CircleNumber <= 0){
       seed = 1;
       CircleNumber =  CurrentSize * 10;

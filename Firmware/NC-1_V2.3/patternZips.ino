@@ -5,7 +5,7 @@
  int* zipcolnum;
  int* ziprownum;
 
-void patternZips3(){
+void patternZips(){
   int ziprow = 0;
   int zipcol = 0;
   int _ziprow=0; int  _zipcol = 0;  
@@ -24,6 +24,7 @@ void patternZips3(){
     pixelnum = 0;
     zipstep = 0;
     seed = 0; 
+    
     lastPattern = currentPattern;
   }
   else{ 
@@ -33,27 +34,31 @@ void patternZips3(){
             _a = random(numCols-1);  
             _b =  0;
             ziprow = 1;
-            zipcol = 0;
+            if(int(((mode - 1) /4)) == 0) zipcol = 0;
+            else zipcol = 1;
             zipmax = 32;
           break;
           case 1:
             _a = random(numCols-1);  
             _b =  31;
             ziprow = -1;
-            zipcol = 0;
+            if(int(((mode - 1) /4)) == 0) zipcol = 0;
+            else zipcol = 1;
             zipmax = 32;
           break;
           case 2:
             _a = 0;  
             _b =  random(numRows-1);
-            ziprow = 0;
+            if(int(((mode - 1) /4)) == 0) ziprow = 0;
+            else ziprow = 1;
             zipcol = 1;
             zipmax = 8;
           break;
           case 3:
             _a = 7;  
             _b =  random(numRows-1);
-            ziprow = 0;
+            if(int(((mode - 1) /4)) == 0) ziprow = 0;
+            else ziprow = 1;
             zipcol = -1;
             zipmax = 8;
           break;

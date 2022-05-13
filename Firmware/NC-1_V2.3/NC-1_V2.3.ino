@@ -287,7 +287,7 @@ void setup() {
   patternnumber = 0;
 }
 
-PatternList Mode1 = {pattern1,pattern2, patternBox, patternOrbits, patternZips3, patternClouds2, patternBox,patternDiamond, patternDots,patternRectangle};
+PatternList Mode1 = {pattern1, pattern2, patternClouds, patternSpots, patternZips, patternMatrix, patternBox,patternDiamond, patternWorms,patternRectangle};
 
 void loop() {
  digitalWrite(RedLED, 1);

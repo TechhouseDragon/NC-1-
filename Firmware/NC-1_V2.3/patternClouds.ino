@@ -1,6 +1,7 @@
 int cloudcol ;  
 int cloudrow ;
-void patternClouds2(){
+int cloudnum;
+void patternClouds(){
   if (lastPattern != currentPattern){
     seed = 1;
   }
@@ -10,15 +11,17 @@ void patternClouds2(){
     frameloops = 0; 
     colShift = 0;
     rowShift = 0;
-    dir=random(8);    
-    setshift2();    
+    cloudnum = mode;
+       
     lastPattern = currentPattern;       
-    for (i =0 ; i<mode;i++){
+    for (i =0 ; i<cloudnum;i++){
       int _a = random(numCols);
       int _b = random(numRows);
       WriteBit(_a, _b, "patternArray", 1);         
     }
   }else{
+     dir=random(8);  
+     setshift(); 
     if(rowShift<0 && colShift < 0 ){
       for (int prow = 0; prow < numRows; prow++){
         for (int pcol = 0; pcol <numCols; pcol++){
@@ -110,7 +113,7 @@ void patternClouds2(){
   setOutputArray();  
   frameloops = frameloops +1;
   triggernow = 0;
-  if (frameloops >= mode2){
+  if (cloudnum != mode){
     seed = 1;
     currentPattern = currentPattern +1;  
   }
